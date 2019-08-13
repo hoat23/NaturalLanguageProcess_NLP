@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/labs.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
+<title>Lab Guide: Search Enhancement Using NLP</title>
+<style>
+.header {
+  font-size: 36px;
+  line-height: 49px;
+  font-family: "Open Sans","arial, helvetica, sans-serif";
+  display: block;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+.logo {
+  vertical-align: top;
+  border: 0;
+}
+
+html {
+  background-color: #e6e9e9;
+  background-image: -webkit-linear-gradient(270deg,rgb(230,233,233) 0%,rgb(216,221,221) 100%);
+  background-image: linear-gradient(270deg,rgb(230,233,233) 0%,rgb(216,221,221) 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.lab1_toggle {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 2.0em;
+  line-height: 1.8em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.virtual_div {
+  text-align: center;
+  background-color: beige;
+  border-color: black;
+  border-width: thin;
+  border-style: solid;
+  padding: 1em 1em 1em;
+}
+
+.left {
+  text-align: left;
+}
+
+body {
+  margin: 0 auto;
+  padding: 2em 2em 4em;
+  max-width: 80%;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  color: #545454;
+  background-color: #ffffff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+  font-weight: 400;
+  line-height: 1.5em;
+  background-color: rgb(7,165,222);
+  font: Arial;
+  padding-left: 15px;
+  box-shadow: 10px 10px 5px rgb(144, 144, 145);
+}
+h2, h3 {
+  background: #3399cc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #3399cc 0%, #003366 0%, #3399cc 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #3399cc 0%,#003366 0%,#3399cc 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #3399cc 0%,#003366 0%,#3399cc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399cc', endColorstr='#3399cc',GradientType=0 ); /* IE6-9 */
+}
+
+h1 {
+  background: #3399cc;
+  background: -moz-linear-gradient(top,  #3399cc 0%, #207cca 0%, #009999 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #3399cc 0%,#207cca 0%,#009999 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #3399cc 0%,#207cca 0%,#009999 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399cc', endColorstr='#009999',GradientType=0 ); /* IE6-9 */
+}
+
+h3 {
+  font-weight: bold;
+}
+
+p.summary {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+a {
+  color: #0083e8;
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+samp {
+  display: none;
+}
+
+img {
+  -webkit-animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+  animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+  background: transparent;
+  border: 10px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  display: block;
+  margin: 1.3em auto;
+  max-width: 95%;
+}
+
+@-webkit-keyframes colorize {
+  0% {
+      -webkit-filter: grayscale(100%);
+  }
+  100% {
+      -webkit-filter: grayscale(0%);
+  }
+}
+
+@keyframes colorize {
+  0% {
+      filter: grayscale(100%);
+  }
+  100% {
+      filter: grayscale(0%);
+  }
+}
+
+pre code {
+  padding: 0;
+  color: #3f3b36;
+  background-color: transparent;
+  font-size: 1.0rem;
+  line-height: 2rem;
+  text-shadow: none;
+}
+
+code {
+  font-weight: lighter;
+  font-family: Monaco,'MonacoRegular',monospace;
+}
+
+pre {
+  width: 92%;
+  overflow: auto;
+  margin: 1rem 0;
+  margin-top: 1rem;
+  margin-right: 0px;
+  margin-bottom: 1rem;
+  margin-left: 0px;
+  padding: 1rem 0.8rem 1rem 1.2rem;
+  padding-top: 1rem;
+  padding-right: 0.8rem;
+  padding-bottom: 1rem;
+  padding-left: 1.2rem;
+  color: #3f3b36;
+  border: 1px solid #39bdb1;
+  border-left: 1rem solid #39bdb1;
+  font: lighter 1.0rem/2rem Monaco,'MonacoRegular',monospace;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-weight: lighter;
+  font-stretch: normal;
+  font-size: 1.0rem;
+  line-height: 1.4rem;
+  font-family: Monaco, MonacoRegular, monospace;
+  background: url(images/pre.png) repeat 0 -0.9rem;
+  background-image: url(images/pre.png);
+  background-position-x: 0px;
+  background-position-y: -0.9rem;
+  background-repeat-x: repeat;
+  background-repeat-y: repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  background-size: 1px 4rem;
+  box-shadow: 10px 10px 5px rgb(144, 144, 145);
+}
+
+pre.bash {
+  background-color: black;
+  color: white;
+  font-family: Monaco,MonacoRegular,monospace;
+}
+
+div[class="listingblock bash"] div[class="content"] pre {
+  background-color: black;
+}
+
+div[class="listingblock bash"] div[class="content"] pre code {
+  color: white;
+  font-family: Monaco,MonacoRegular,monospace;
+  line-height: 1.4rem;
+}
+
+hr {
+  margin-bottom: 4em;
+  margin-top: 4em;
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to right, #66ccff, #006699, #66ccff);
+}
+
+ol li {
+  margin-top: 3rem;
+}
+
+ul li {
+  margin-top: 0
+}
+
+kbd {
+  font-family: Courier, Monaco,'MonacoRegular',monospace;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+}
+
+.kbd {
+  font-family: Courier, Monaco,'MonacoRegular',monospace;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+table.labTable {
+  border: 1px solid #1C6EA4;
+  /* background-color: #EEEEEE;*/
+  width: 70%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table.labTable td, table.labTable th {
+  border: 3px solid #1C6EA4;
+  padding: 3px 2px;
+}
+
+table.labTable tbody td {
+  font-size: 16px;
+}
+
+table.labTable tr:nth-child(even) {
+  background: #D0E4F5;
+}
+
+table.labTable thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+}
+
+table.labTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  border-left: 2px solid #D0E4F5;
+}
+
+table.labTable thead th:first-child {
+  border-left: none;
+}
+
+table.relevance {
+    border: 1px solid black;
+    font-size: 0.8em;
+    border-collapse: collapse;
+}
+.relevance th {
+    text-align: left;
+    white-space: nowrap;
+    border-top: 1px solid black;
+}
+
+.relevance tr {
+    border-top: 1px solid #dddddd;
+}
+
+.relevance td, .relevance th {
+  padding: 2px 5px;
+  vertical-align: top;
+  text-overflow: TODO;
+}
+
+</style>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="shortcut icon" href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/images/favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="./Lab Guide_ Search Enhancement Using NLP_files/elastic_training.js.descarga"></script>
+<style type="text/css">:root topadblock, :root input[onclick^="window.open('http://www.FriendlyDuck.com/"], :root img[alt^="Fuckbook"], :root iframe[src^="http://static.mozo.com.au/strips/"], :root iframe[src^="http://cdn2.adexprt.com/"], :root a[href^="http://pubads.g.doubleclick.net/"], :root a[href^="https://sexdatingz.live/"], :root iframe[src^="http://ad.yieldmanager.com/"], :root header#hdr + #main > div[data-hveid], :root a[onclick*="//m.economictimes.com/etmack/click.htm"], :root div[role="navigation"] + c-wiz > script + div > .kxhcC, :root div[id^="mainads"], :root div[id^="dmRosAdWrapper"], :root a[href^="http://at.atwola.com/"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root div[id^="div-ads-"], :root a[data-obtrack^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://www1.clickdownloader.com/"], :root div[id^="cns_ads_"], :root #\5f _admvnlb_modal_container, :root div[id^="adspot-"], :root a[href^="https://trust.zone/go/r.php?RID="], :root div[id^="tms-ad-dfp-"], :root input[onclick^="window.open('http://www.friendlyduck.com/"], :root div[id^="ads300_250-widget"], :root div[id^="ads250_250-widget"], :root div[id^="adrotate_widgets-"], :root div[id^="adfox_"], :root div[id^="ad_script_"], :root #content > #right > .dose > .dosesingle, :root div[id^="ad_bigbox_"], :root div[id^="ad-server-"], :root div[id^="acm-ad-tag-"], :root div[id^="ADV-SLOT-"], :root div[data-native_ad], :root a[href^=" http://n47adshostnet.com/"], :root div[data-id^="CarouselPLA-"] > .kzwEHf, :root div[class^="proadszone-"], :root div[class^="pane-google-admanager-"], :root a[href^="http://adultgames.xxx/"], :root a[href^="http://semi-cod.com/clicks/"], :root div[class^="index_displayAd_"], :root a[href^="http://www.affbuzzads.com/affiliate/"], :root div[class^="index_adBeforeContent_"], :root div[class^="index_adAfterContent_"], :root div[class^="block-openx-"], :root div[class^="ads-partner-"], :root div[class^="ad_position_"], :root div[class^="ad_border_"], :root a[href^="http://adprovider.adlure.net/"], :root div[class^="Ad__container"], :root div[id^="div-adtech-ad-"], :root div[class*="_AdInArticle_"], :root div > [class][onclick*=".updateAnalyticsEvents"], :root a[href^="http://internalredirect.site/"], :root bottomadblock, :root a[href^="https://watchmygirlfriend.tv/"], :root a[href^="http://2pxg8bcf.top/"], :root aside[itemtype="https://schema.org/WPAdBlock"], :root a[href^="http://c.actiondesk.com/"], :root aside[id^="div-gpt-ad"], :root div[id^="ad-cid-"], :root a[href^="http://lp.ezdownloadpro.info/"], :root a[href^="http://uploaded.net/ref/"], :root aside[id^="advads_ad_widget-"], :root aside[id^="adrotate_widgets-"], :root a[target="_blank"][href^="http://api.taboola.com/"], :root a[style="display:block;width:300px;min-height:250px"][href^="http://li.cnet.com/click?"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[href^="http://popup.taboola.com/"], :root a[href^="//adbit.co/?a=Advertise&"], :root a[onmousedown^="this.href='/wp-content/embed-ad-content/"], :root div[class^="AdhesionAd_"], :root div[class^="Ad__bigBox"], :root a[href^="https://www.what-sexdating.com/"], :root a[href^="https://www.travelzoo.com/oascampaignclick/"], :root a[href^="https://www.share-online.biz/affiliate/"], :root div[id^="advads_"], :root a[href^="https://www.moscarossa.biz/"], :root a[href^="http://www.usearchmedia.com/signup?"], :root a[onmousedown^="this.href='http://staffpicks.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[href^="https://www.incontri-matura.com/"], :root a[href^="https://www.goldenfrog.com/vyprvpn?offer_id="][href*="&aff_id="], :root .trc_related_container div[data-item-syndicated="true"], :root a[href^="https://www.firstload.com/affiliate/"], :root a[href^="https://www.camyou.com/?cam="][href*="&track="], :root a[href^="https://www.bebi.com"], :root a[href^="https://www.adskeeper.co.uk/"], :root a[href^="http://pan.adraccoon.com?"], :root div[id^="ad-gpt-"], :root a[href^="http://farm.plista.com/pets"], :root a[href^="https://windscribe.com/promo/"], :root a[href^="http://serve.williamhill.com/promoRedirect?"], :root a[href^="https://vodexor.us/"], :root a[href^="https://track.adform.net/"], :root a[href^="https://traffic.bannerator.com/"], :root a[href^="https://tracking.truthfinder.com/?a="], :root a[href^="https://www.adultempire.com/"][href*="?partner_id="], :root a[href^="https://track.healthtrader.com/"], :root a[href^="https://track.clickmoi.xyz/"], :root a[href^="https://control.trafficfabrik.com/"], :root a[href^="https://track.52zxzh.com/"], :root div[class^="gemini-ad"], :root a[href^="http://pwrads.net/"], :root a[href^="//oardilin.com/"], :root a[href^="http://gca.sh/user/register?ref="], :root a[href^="https://torguard.net/aff.php"], :root a[href^="https://t.mobtya.com/"], :root aside[id^="tn_ads_widget-"], :root a[href^="https://syndication.exoclick.com/splash.php?"], :root a[href^="http://click.guamwnvgashbkashawhgkhahshmashcas.pw/"], :root div[id^="YFBMSN"], :root div[id^="ad-div-"], :root a[href^="https://secure.eveonline.com/ft/?aid="], :root div[id^="zergnet-widget"], :root a[href^="https://rev.adsession.com/"], :root a[href^="https://retiremely.com/"], :root a[href^="http://y1jxiqds7v.com/"], :root div[id^="yandex_ad"], :root a[href^="https://www.pornhat.com/"][rel="nofollow"], :root AD-SLOT, :root a[href^="http://green.trafficinvest.com/"], :root a[href^="https://pubads.g.doubleclick.net/"], :root a[href^="https://prf.hn/click/"][href*="/adref:"], :root a[href^="https://mk-cdn.net/"], :root div[id^="proadszone-"], :root a[href^="https://mk-ads.com/"], :root a[href^="https://jmp.awempire.com/"], :root a[href^="https://members.linkifier.com/public/affiliateLanding?refCode="], :root a[href^="https://medleyads.com/"], :root div[id^="ads300_100-widget"], :root a[href^="https://click.plista.com/pets"], :root a[href^="https://lingthatsparleso.info/"], :root a[href*=".approvallamp.club/"], :root a[href^="https://landing1.brazzersnetwork.com"], :root a[href^="https://land.rk.com/landing/"], :root .lads[width="100%"][style="background:#FFF8DD"], :root a[href^="https://land.brazzersnetwork.com/landing/"], :root a[href^="https://incisivetrk.cvtr.io/click?"], :root a[href^="https://iactrivago.ampxdirect.com/"], :root a[href^="https://googleads.g.doubleclick.net/pcs/click"], :root a[href^="http://cdn.adstract.com/"], :root a[href^="https://gogoman.me/"], :root a[href^="https://go.stripchat.com/"][href*="&campaignId="], :root div[class^="BlockAdvert-"], :root a[href^="https://go.onclasrv.com/"], :root a[href*=".inclk.com/"], :root a[href^="https://go.ad2up.com/"], :root a[href^="https://freeadult.games/"], :root a[href^="//nlkdom.com/"], :root a[onmousedown^="this.href='http://staffpicks.outbrain.com/network/redir?"][target="_blank"], :root a[href^="https://fonts.fontplace9.com/"], :root a[href^="http://clkmon.com/adServe/"], :root a[href^="https://flirtaescopa.com/"], :root a[href^="https://farm.plista.com/pets"], :root a[href^="https://evaporate.pw/"], :root a[href^="http://wxdownloadmanager.com/dl/"], :root div[class^="local-feed-banner-ads"], :root .GFYY1SVE2 > .GFYY1SVD2 > .GFYY1SVG5, :root a[href^="https://djtcollectorclub.org/"][href*="?affiliate_id="], :root a[href^="https://chaturbate.xyz/"], :root a[href^="https://chaturbate.jjgirls.com/"][href*="?tour="], :root a[href^="https://chaturbate.com/in/?tour="], :root a[href^="https://chaturbate.com/affiliates/"], :root a[href^="http://www.1clickdownloader.com/"], :root a[href^="https://www.googleadservices.com/pagead/aclk?"], :root a[href^="https://awentw.com/"], :root a[href^="https://servedbyadbutler.com/"], :root a[href^="http://dethao.com/"], :root a[href^="https://ads.ad4game.com/"], :root a[href^="https://betway.com/"][href*="&a="], :root a[href^="https://affiliates.bet-at-home.com/processing/"], :root a[href*="pussl3.com"], :root a[href^="https://adswick.com/"], :root ADS-RIGHT, :root .GKJYXHBF2 > .GKJYXHBE2 > .GKJYXHBH5, :root a[href^="https://adserver.adreactor.com/"], :root a[href^="https://refpaano.host/"], :root a[href^="http://data.linoleictanzaniatitanic.com/"], :root a[href^="https://adhealers.com/"], :root a[href^="https://adclick.g.doubleclick.net/"], :root a[href^="https://ad.doubleclick.net/"], :root a[href^="http://zevera.com/afi.html"], :root a[href^="http://go.oclaserver.com/"], :root a[href^="https://ad.atdmt.com/"], :root .trc_rbox .syndicatedItem, :root a[href^="https://aaucwbe.com/"], :root a[href^="https://a.adtng.com/"], :root a[href^="http://xtgem.com/click?"], :root a[href^="https://ads.trafficpoizon.com/"], :root a[href^="http://rekoverr.com/"], :root a[href^="https://chaturbate.com/in/?track="], :root a[href^="http://www.zergnet.com/i/"], :root a[href^="http://hyperies.info/"], :root a[href^="http://galleries.pinballpublishernetwork.com/"], :root a[href^="http://www.torntv-downloader.com/"], :root a[href^="http://www.tirerack.com/affiliates/"], :root a[href^="http://www.text-link-ads.com/"], :root a[href^="http://www.friendlyquacks.com/"], :root div[id^="div_openx_ad_"], :root a[href^="http://www.streamate.com/exports/"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"], :root a[href^="http://www.sfippa.com/"], :root a[href^="http://www.xmediaserve.com/"], :root a[href^="http://www.sex.com/videos/?utm_"], :root a[href^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://www.sex.com/?utm_"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"], :root a[href^="http://www.roboform.com/php/land.php"], :root a[href^="http://www.myfreecams.com/?co_id="][href*="&track="], :root div[id^="advads-"], :root a[href^="http://ad.au.doubleclick.net/"], :root a[href^="http://www.ringtonematcher.com/"], :root a[href^="http://secure.signup-page.com/"], :root a[href^="http://www.quick-torrent.com/download.html?aff"], :root a[href^="http://adexprt.me/"], :root a[href^="http://www.pinkvisualgames.com/?revid="], :root a[href^="https://trklvs.com/"], :root a[href^="http://www.paddypower.com/?AFF_ID="], :root div[data-spotim-slot], :root a[href^="http://www.freefilesdownloader.com/"], :root a[href^="http://www.mysuperpharm.com/"], :root .trc_rbox_border_elm .syndicatedItem, :root a[href^="http://www.myfreepaysite.com/sfw_int.php?aid"], :root a[href^="http://www.myfreepaysite.com/sfw.php?aid"], :root .rhsvw[style="background-color:#fff;margin:0 0 14px;padding-bottom:1px;padding-top:1px;"], :root a[href^="http://www.moneyducks.com/"], :root a[href^="http://bcntrack.com/"], :root a[href^="http://www.securegfm.com/"], :root a[href^="http://www.liversely.net/"], :root a[href^="http://www.linkbucks.com/referral/"], :root a[href^="//88d7b6aa44fb8eb.com/"], :root a[href^="http://www.ireel.com/signup?ref"], :root a[href*="=Adtracker"], :root a[href^="http://www.incredimail.com/?id="], :root a[href^="http://www.idownloadplay.com/"], :root a[href^="http://www.hitcpm.com/"], :root a[href^="http://www.greenmangaming.com/?tap_a="], :root a[href^="http://www.gamebookers.com/cgi-bin/intro.cgi?"], :root a[href^="https://www.financeads.net/tc.php?"], :root a[href^="http://www.friendlyduck.com/AF_"], :root a[href*="emprestimo.eu"], :root a[href^="http://www.fpcTraffic2.com/blind/in.cgi?"], :root a[href^="http://www.fonts.com/BannerScript/"], :root a[href^="http://www.fleshlight.com/"], :root a[href^="http://www.flashx.tv/downloadthis"], :root a[href^="http://clickserv.sitescout.com/"], :root a[href^="http://www.firstload.de/affiliate/"], :root a[href^="http://www.twinplan.com/AF_"], :root a[href^="http://www.fducks.com/"], :root a[href^="http://marketgid.com"], :root a[href^="http://www.faceporn.net/free?"], :root a[href^="http://www.epicgameads.com/"], :root a[href^="http://www.easydownloadnow.com/"], :root a[href^="http://www.duckssolutions.com/"], :root a[href^="https://go.trkclick2.com/"], :root a[href^="http://www.duckcash.eu/"], :root a[href^="http://www.drowle.com/"], :root a[href^="http://go.seomojo.com/tracking202/"], :root a[href^="http://www.downloadweb.org/"], :root .commercial-unit-mobile-top .jackpot-main-content-container > .UpgKEd + .nZZLFc > .vci, :root a[href^="http://www.installads.net/"], :root div[role="navigation"] + c-wiz > div > .kxhcC, :root a[href^="http://www.download-provider.org/"], :root a[href^="http://www.down1oads.com/"], :root a[href^="http://www.bluehost.com/track/"] > img, :root iframe[id^="google_ads_frame"], :root a[href^="https://trafficmedia.center/"], :root a[href^="http://www.dealcent.com/register.php?affid="], :root .rscontainer > .ellip, :root a[href^="http://www.clkads.com/adServe/"], :root a[href^="http://www.clickansave.net/"], :root div[class^="adpubs-"], :root a[href*="deliver.trafficfabrik.com"], :root a[href^="http://www.cash-duck.com/"], :root a[href^="http://www.bitlord.me/share/"], :root a[href^="http://www.bet365.com/"][href*="?affiliate="], :root a[href^="http://www.bet365.com/"][href*="&affiliate="], :root a[href^="http://www.badoink.com/go.php?"], :root #mbEnd[cellspacing="0"][cellpadding="0"], :root div[data-ad-underplayer], :root a[href^="http://www.richducks.com/"], :root a[href^="http://www.babylon.com/welcome/index?affID"], :root a[href^="http://www.sexgangsters.com/?pid="], :root a[href^="http://www.amazon.co.uk/exec/obidos/external-search?"], :root a[href^="https://ads-for-free.com/click.php?"], :root a[href^="http://tracker.mybroadband.co.za/"], :root a[href^="http://www.socialsex.com/"], :root a[href^="https://www.camsoda.com/enter.php?id="], :root a[href^="http://www.afco2go.com/srv.php?"], :root a[href^="http://go.ad2up.com/"], :root a[href^="https://badoinkvr.com/"], :root a[href*="/adServe/banners?"], :root a[href^="http://www.adxpansion.com"], :root a[href^="http://www.ragazzeinvendita.com/?rcid="], :root .plistaList > .itemLinkPET, :root a[href^="http://ads.pheedo.com/"], :root a[href^="http://www.adbrite.com/mb/commerce/purchase_form.php?"], :root a[href^="http://www.TwinPlan.com/AF_"], :root #rhs_block .mod > .gws-local-hotels__booking-module, :root a[href^="http://www.my-dirty-hobby.com/?sub="], :root a[href^="https://porndeals.com/?track="], :root a[href^="http://www.affiliates1128.com/processing/"], :root a[href^="http://c.jumia.io/"], :root a[href^="http://www.1clickmoviedownloader.info/"], :root div[class^="adbanner_"], :root a[href^="http://www.brightwheel.info/"], :root a[href^="http://www.123-reg.co.uk/affiliate2.cgi"], :root div[id^="lazyad-"], :root div[itemtype="http://www.schema.org/WPAdBlock"], :root a[href^="http://wopertific.info/"], :root a[href^="http://bodelen.com/"], :root a[href^="http://wgpartner.com/"], :root a[href^="http://webgirlz.online/landing/"], :root div[id^="ads300_600-widget"], :root div[class^="Ad__adContainer"], :root a[href^="http://web.adblade.com/"], :root a[href^="http://s9kkremkr0.com/"], :root a[href^="https://www.nutaku.net/signup/landing/"], :root a[href^="http://us.marketgid.com"], :root a[href^="http://ul.to/ref/"], :root a[href^="http://trk.mdrtrck.com/"], :root a[href*=".ichlnk.com/"], :root div[id^="div_ad_stack_"], :root a[href^="http://traffic.tc-clicks.com/"], :root div[class^="awpcp-random-ads"], :root a[href^="http://www.graboid.com/affiliates/"], :root a[href^="http://tracking.toroadvertising.com/"], :root a[href^="http://www.liutilities.com/"], :root a[href^="http://www.dl-provider.com/search/"], :root a[href^="http://tracking.deltamediallc.com/"], :root a[href^="http://adultfriendfinder.com/p/register.cgi?pid="], :root a[href^="https://www.popads.net/users/"], :root a[href^="//bwnjijl7w.com/"], :root a[href^="https://adultfriendfinder.com/go/page/landing"], :root a[href^="http://tracking.crazylead.com/"], :root a[href^="http://track.adform.net/"], :root a[href^="http://tour.affbuzzads.com/"], :root a[href^="https://iac.ampxdirect.com/"], :root a[href^="http://t.mdn2015x3.com/"], :root a[href^="http://steel.starflavor.bid/"], :root a[href^="http://galleries.securewebsiteaccess.com/"], :root a[href^="http://stateresolver.link/"], :root a[href^="http://sharesuper.info/"], :root a[href^="http://server.cpmstar.com/click.aspx?poolid="], :root a[href^="http://www.downloadthesefiles.com/"], :root a[href^="http://secure.cbdpure.com/aff/"], :root a[href^="http://t.mdn2015x1.com/"], :root a[href^="http://azmobilestore.co/"], :root a[href^="http://s5prou7ulr.com/"], :root a[href*="/cmd.php?ad="], :root a[href^="http://refpaano.host/"], :root #\5f _mom_ad_2, :root a[href^="http://ads.sprintrade.com/"], :root a[href^="http://record.commissionking.com/"], :root div[class*="-storyBodyAd-"], :root a[href^="http://record.betsafe.com/"], :root a[href^="https://keep2share.cc/pr/"], :root a[href^="https://clixtrac.com/"], :root [onclick*="content.ad/"], :root a[href^="http://adlev.neodatagroup.com/"], :root a[href^="http://reallygoodlink.extremefreegames.com/"], :root .ob_container .item-container-obpd, :root a[href^="http://www.adskeeper.co.uk/"], :root a[href^="http://websitedhoome.com/"], :root a[href^="http://see-work.info/"], :root a[href^="http://prousa.work/"], :root a[href^="http://promos.bwin.com/"], :root a[href^="http://prochina.link/"], :root a[href*=".irtyc.com/"], :root a[href^="http://z1.zedo.com/"], :root a[href^="http://pokershibes.com/index.php?ref="], :root #rhs_block .mod > .luhb-div > div[data-async-type="updateHotelBookingModule"], :root a[href^="http://mojofun.info/"], :root a[href^="http://mmo123.co/"], :root a[href^="http://media.paddypower.com/redirect.aspx?"], :root a[href*=".qertewrt.com/"], :root a[href^="//pubads.g.doubleclick.net/"], :root a[href^="http://lp.ncdownloader.com/"], :root #rhs_block .xpdopen > ._OKe > div > .mod > ._yYf, :root a[href^="//ads.ad-center.com/"], :root a[href^="https://track.trkinator.com/"], :root a[data-redirect^="this.href='http://paid.outbrain.com/network/redir?"], :root div[id^="ad-position-"], :root a[href^="http://liversely.com/"], :root a[href^="https://www.arthrozene.com/"][href*="?tid="], :root a[href^="http://feeds1.validclick.com/"], :root a[href^="http://latestdownloads.net/download.php?"], :root a[href^="http://k2s.cc/code/"], :root #topstuff > #tads, :root a[href^="https://atomidownload.com/"], :root a[href*=".bang.com/"][href*="&aff="], :root a[data-widget-outbrain-redirect^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://join3.bannedsextapes.com/track/"], :root a[href^="https://secure.bstlnk.com/"], :root a[href^="http://jobitem.org/"], :root a[href^="https://gamescarousel.com/"], :root a[href^="http://istri.it/?"], :root a[href^="http://www.fbooksluts.com/"], :root a[href^="http://www.cdjapan.co.jp/aff/click.cgi/"], :root a[href^="//api.ad-goi.com/"], :root a[href*="//ridingintractable.com/"], :root a[href^="http://intent.bingads.com/"], :root div[id^="crt-"][style], :root a[href^="http://igromir.info/"], :root a[href^="https://track.themadtrcker.com/"], :root a[href^="http://hyperlinksecure.com/go/"], :root a[href^="http://45eijvhgj2.com/"], :root a[href^="http://hpn.houzz.com/"], :root a[href^="http://searchtabnew.com/"], :root a[href*="?adlivk="][href*="&refer="], :root a[href^="//look.djfiln.com/"], :root a[href^="http://greensmoke.com/"], :root a[href^="https://bnsjb1ab1e.com/"], :root a[href^="http://mo8mwxi1.com/"], :root div[class^="ResponsiveAd-"], :root a[href^="http://install.securewebsiteaccess.com/"], :root a[href^="http://www.revenuehits.com/"], :root div[id^="block-views-topheader-ad-block-"], :root a[href^="https://bs.serving-sys.com"], :root .__y_elastic .__y_item, :root a[href^="http://go.mobisla.com/"], :root a[href^="//srv.buysellads.com/"], :root a[href^="http://g1.v.fwmrm.net/ad/"], :root .widget-pane-section-result[data-result-ad-type], :root a[href^="http://imads.integral-marketing.com/"], :root a[href^="http://freesoftwarelive.com/"], :root a[href^="http://adtrackone.eu/"], :root a[href^="http://finaljuyu.com/"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root a[href^="http://fileupnow.rocks/"], :root a[href^="http://fileloadr.com/"], :root a[href^="https://dltags.com/"], :root a[href^="http://onclickads.net/"], :root a[href^="https://gghf.mobi/"], :root a[href^="http://www.terraclicks.com/"], :root a[href^="http://www.coinducks.com/"], :root a[href^="http://extra.bet365.com/"][href*="?affiliate="], :root a[href^="http://ethfw0370q.com/"], :root [id^="bunyad_ads_"], :root a[href^="http://elitefuckbook.com/"], :root a[href^="https://www.brazzersnetwork.com/landing/"], :root #cnt #center_col > #taw > #tvcap > .c._oc._Lp, :root [href*="//xml.revrtb.com/"], :root a[href^="http://elite-sex-finder.com/?"], :root a[href^="http://eclkmpsa.com/"], :root a[href*="//3wr110.xyz/"], :root a[href^="http://earandmarketing.com/"], :root a[href^="https://www.mypornstarcams.com/landing/click/"], :root a[href*=".intab.fun/"], :root a[href^="http://secure.signup-way.com/"], :root [href^="https://maskip.co/"], :root a[href^="http://getlinksinaseconds.com/"], :root #content > #center > .dose > .dosesingle, :root a[href^="http://campaign.bharatmatrimony.com/track/"], :root a[href^="http://d2.zedo.com/"], :root a[href^="http://keep2share.cc/pr/"], :root a[href^="http://cp.cbbp1.com"], :root a[href^="http://contractallsticker.net/"], :root a[href^="http://codec.codecm.com/"], :root div[id^="google_dfp_"], :root a[href^="//5e1fcb75b6d662d.com/"], :root a[href^="http://googleads.g.doubleclick.net/pcs/click"], :root div[id^="ads120_600-widget"], :root a[href^="https://awejmp.com/"], :root a[href^="http://clk.directrev.com/"], :root a[href^="http://refer.webhostingbuzz.com/"], :root a[href^="http://clicks.guamwnvgashbkashawhgkhahshmashcas.pw/"], :root a[href^="http://www.downloadplayer1.com/"], :root a[href^="http://clicks.binarypromos.com/"], :root div[class^="largeRectangleAd_"], :root a[href^="https://dediseedbox.com/clients/aff.php?"], :root a[href^="http://www.wantstraffic.com/"], :root a[href^="http://databass.info/"], :root a[href^="http://www.urmediazone.com/signup"], :root a[href^="http://click.plista.com/pets"], :root a[href^="http://chaturbate.com/affiliates/"], :root a[href^="http://www.firstload.com/affiliate/"], :root a[href^="http://www.friendlyadvertisements.com/"], :root a[href^="//00ae8b5a9c1d597.com/"], :root a[href^="http://cdn3.adbrau.com/"], :root a[href^="http://get.slickvpn.com/"], :root a[href^="http://amzn.to/"] > img[src^="data"], :root a[href^="http://bs.serving-sys.com/"], :root a[href^="http://cpaway.afftrack.com/"], :root a[href^="http://cdn.adsrvmedia.net/"], :root [lazy-ad="top_banner"], :root a[href^="http://360ads.go2cloud.org/"], :root a[href^="http://dftrck.com/"], :root a[href^="http://casino-x.com/?partner"], :root div[data-flt-ve="sponsored_search_ads"], :root a[href^="http://record.sportsbetaffiliates.com.au/"], :root a[href^="http://campeeks.com/"][href*="&utm_"], :root #flowplayer > div[style="position: absolute; width: 300px; height: 275px; left: 222.5px; top: 85px; z-index: 999;"], :root a[href^="http://download-performance.com/"], :root a[href^="http://www.on2url.com/app/adtrack.asp"], :root #\5f _nq__hh[style="display:block!important"], :root a[href^="http://guideways.info/"], :root a[href^="http://campaign.bharatmatrimony.com/cbstrack/"], :root a[href^="http://ads.expekt.com/affiliates/"], :root a[href^="http://callville.xyz/"], :root a[href^="https://www.nudeidols.com/cams/"], :root div[itemtype="http://schema.org/WPAdBlock"], :root a[href^="http://xads.zedo.com/"], :root a[href^="http://yads.zedo.com/"], :root a[href^="https://bullads.net/get/"], :root a[href^="http://down1oads.com/"], :root a[href^="http://buysellads.com/"], :root a[href^="https://uncensored.game/"], :root td[valign="top"] > .mainmenu[style="padding:10px 0 0 0 !important;"], :root a[href^="http://feedads.g.doubleclick.net/"], :root a[href^="http://betahit.click/"], :root a[href^="http://bestorican.com/"], :root a[href^="http://bcp.crwdcntrl.net/"], :root a[href^="http://bc.vc/?r="], :root a[href^="http://www.pheedo.com/"], :root a[href^="http://banners.victor.com/processing/"], :root a[href^="http://adf.ly/?id="], :root a[href^="https://uncensored3d.com/"], :root a[href^="http://t.mdn2015x2.com/"], :root div[data-subscript="Advertising"], :root div[class$="dealnews"] > .dealnews, :root a[href^="http://click.payserve.com/"], :root a[href^="http://api.ringtonematcher.com/"], :root a[href^="http://affiliate.glbtracker.com/"], :root a[href^="https://transfer.xe.com/signup/track/redirect?"], :root a[href^="http://anonymous-net.com/"], :root a[href^="https://www.dsct1.com/"], :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root .icons-rss-feed + .icons-rss-feed div[class$="_item"], :root a[href^="http://aflrm.com/"], :root a[href^="http://affiliates.pinnaclesports.com/processing/"], :root a[href^="http://affiliate.godaddy.com/"], :root a[href^="http://partner.sbaffiliates.com/"], :root a[href^="http://affiliate.coral.co.uk/processing/"], :root a[href^="http://aff.ironsocket.com/"], :root a[href^="http://adsrv.keycaptcha.com"], :root a[data-redirect^="https://paid.outbrain.com/network/redir?"], :root a[href^="http://play4k.co/"], :root a[href^="http://adserving.liveuniversenetwork.com/"], :root a[href^="https://zononi.com/"], :root a[href^="http://adserving.unibet.com/"], :root a[href^="http://adtransfer.net/"], :root a[href^="http://adserver.itsfogo.com/"], :root a[href^="https://secure.adnxs.com/clktrb?"], :root a[href^="http://adserver.adtechus.com/"], :root a[href^="http://adserver.adreactor.com/"], :root a[href^="http://www.yourfuckbook.com/?"], :root a[href^="//go.onclasrv.com/"], :root .GHOFUQ5BG2 > .GHOFUQ5BF2 > .GHOFUQ5BG5, :root .__ywvr .__y_item, :root #\5f _mom_ad_12, :root a[href^="http://ads.integral-marketing.com/"], :root a[href^="http://adserver.adtech.de/"], :root a[href^="http://cwcams.com/landing/click/"], :root a[href^="http://ads.betfair.com/redirect.aspx?"], :root a[href^="http://ads.affbuzzads.com/"], :root a[href^="http://online.ladbrokes.com/promoRedirect?"], :root a[href^="http://go.trafficshop.com/"], :root a[href^="http://ads.ad-center.com/"], :root div[id^="advt-"], :root a[href^="http://admingame.info/"], :root div[id^="q1-adset-"], :root a[href^="http://adfarm.mediaplex.com/"], :root a[href^="http://ad.doubleclick.net/"], :root a[href^="https://understandsolar.com/signup/?lead_source="][href*="&tracking_code="], :root a[href^="http://ad-emea.doubleclick.net/"], :root a[href*="/servlet/click/zone?"], :root a[href^="http://ad-apac.doubleclick.net/"], :root script[src^="http://free-shoutbox.net/app/webroot/shoutbox/sb.php?shoutbox="] + #freeshoutbox_content, :root a[href^="http://hdplugin.flashplayer-updates.com/"], :root .trc_rbox_div .syndicatedItem, :root a[href^="http://data.ad.yieldmanager.net/"], :root a[href^="http://a63t9o1azf.com/"], :root a[href^="http://srvpub.com/"], :root a[href^="http://a.adquantix.com/"], :root a[href^="http://NowDownloadAll.com"], :root #assetsListings[style="display: block;"], :root a[href^="http://9nl.es/"], :root a[href^="http://abc2.mobile-10.com/"], :root a[href^="http://adtrack123.pl/"], :root [id*="MGWrap"], :root a[href^="http://9amq5z4y1y.com/"], :root a[href^="http://4c7og3qcob.com/"], :root a[href^="//go.vedohd.org/"], :root a[href^="http://www.ducksnetwork.com/"], :root a[href^="http://3wr110.net/"], :root a[href^="http://www5.smartadserver.com/call/pubjumpi/"], :root a[href^="http://1phads.com/"], :root #MAIN.ShowTopic > .ad, :root a[href^="https://porngames.adult/?SID="], :root a[href^="http://findersocket.com/"], :root a[href^="https://m.do.co/c/"] > img, :root a[href^="http://connectlinking6.com/"], :root a[href^="https://spygasm.com/track?"], :root a[href^="http://cdn3.adexprts.com/"], :root #tads + div + .c, :root a[href^="//jsmptjmp.com/"], :root a[href^="https://ilovemyfreedoms.com/"][href*="?affiliate_id="], :root a[href^="//healthaffiliate.center/"], :root a[href^="http://games.ucoz.ru/"][target="_blank"], :root [id*="ScriptRoot"], :root a[href^="//db52cc91beabf7e8.com/"], :root a[href^="http://ads.activtrades.com/"], :root div[id^="drudge-column-ads-"], :root .plistaList > .plista_widget_underArticle_item[data-type="pet"], :root #center_col > #taw > #tvcap > .commercial-unit-desktop-top, :root a[href^="http://www.afgr2.com/"], :root #mn div[style="position:relative"] > #center_col > ._Ak, :root a[href^="https://www.oboom.com/ad/"], :root a[href^="//4f6b2af479d337cf.com/"], :root a[href^="https://www.friendlyduck.com/AF_"], :root #center_col > #resultStats + div + #res + #tads, :root a[href^="//40ceexln7929.com/"], :root div[id^="div-gpt-ad"], :root a[href^="http://fusionads.net"], :root a[href^=" http://www.sex.com/"][href*="&utm_"], :root .section-result[data-result-ad-type], :root a[href^=" http://ads.ad-center.com/"], :root div[id^="dfp-slot-"], :root .l-container > #fishtank, :root a[href^="https://fileboom.me/pr/"], :root .GPMV2XEDA2 > .GPMV2XEDP1 > .GPMV2XEDJBB, :root a[href*="onclkds."], :root #ads > .dose > .dosesingle, :root a[href*="delivery.trafficfabrik.com"], :root a[href*="=exoclick"], :root div[class^="backfill-taboola-home-slot-"], :root a[href*="=adscript"], :root #mn #center_col > div > h2.spon:first-child, :root FBS-AD, :root .ra[align="right"][width="30%"], :root a[href*="5iclx7wa4q.com"], :root a[href*=".revimedia.com/"], :root [lazy-ad="leftbottom_banner"], :root p[id^="div-gpt-ad-"], :root a[href^="http://fsoft4down.com/"], :root a[href*="ad2upapp.com/"], :root .inlineNewsletterSubscription + .inlineNewsletterSubscription div[class$="_item"], :root #taw > .med + div > #tvcap > .mnr-c:not(.qs-ic) > .commercial-unit-mobile-top, :root .plista_widget_belowArticleRelaunch_item[data-type="pet"], :root div[data-mediatype="advertising"], :root .mw > #rcnt > #center_col > #taw > #tvcap > .c, :root a[href^="https://playuhd.host/"], :root a[href^="http://mgid.com/"], :root a[href*=".adsrv.eacdn.com/"] > img, :root a[href^="http://lp.ilivid.com/"], :root iframe[id^="google_ads_iframe"], :root a[href^="http://secure.hostgator.com/~affiliat/"], :root [onclick^="window.open('http://adultfriendfinder.com/search/"], :root a[href^="http://data.committeemenencyclopedicrepertory.info/"], :root a[href*=".allsports4you.club"], :root a[href^="http://spygasm.com/track?"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root a[href*=".adk2x.com/"], :root a[href^="http://duckcash.eu/"], :root a[href^="http://www.mobileandinternetadvertising.com/"], :root .GB3L-QEDGY .GB3L-QEDF- > .GB3L-QEDE-, :root a[data-url^="http://paid.outbrain.com/network/redir?"] + .author, :root a[href^="http://liversely.net/"], :root .ra[width="30%"][align="right"] + table[width="70%"][cellpadding="0"], :root a[data-url^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://n.admagnet.net/"], :root a[href^="http://bestchickshere.com/"], :root a[href^="http://www.streamtunerhd.com/signup?"], :root #ssmiwdiv[jsdisplay], :root a[href^="//awejmp.com/"], :root a[href^="http://www.getyourguide.com/?partner_id="], :root [onclick^="window.open('https://www.brazzersnetwork.com/landing/"], :root a[href*="a2g-secure.com"], :root #resultspanel > #topads, :root a[href^="http://espn.zlbu.net/"], :root a[href^="http://k2s.cc/pr/"], :root [onclick^="window.open('window.open('//delivery.trafficfabrik.com/"], :root a[href^="http://adrunnr.com/"], :root [lazy-ad="leftthin_banner"], :root [id*="MarketGid"], :root a[href^="http://www.accuserveadsystem.com/accuserve-go.php?"], :root a[href^="http://c.ketads.com/"], :root a[href^="http://6kup12tgxx.com/"], :root a[target="_blank"][onmousedown="this.href^='http://paid.outbrain.com/network/redir?"], :root a[href^="http://hd-plugins.com/download/"], :root a[href^="//voyeurhit.com/cs/"], :root a[href^="http://www.afgr3.com/"], :root [ad-id^="googlead"], :root a[href^="https://topoffers.com/"][href*="/?pid="], :root a[href^="http://vinfdv6b4j.com/"], :root a[href^="http://bonusfapturbo.nmvsite.com/"], :root a[href^="//porngames.adult/?SID="], :root DFP-AD, :root a[href^="//www.mgid.com/"], :root #center_col > div[style="font-size:14px;margin-right:0;min-height:5px"] > div[style="font-size:14px;margin:0 4px;padding:1px 5px;background:#fff8e7"], :root a[href^="http://track.affiliatenetwork.co.za/"], :root a[data-redirect^="http://paid.outbrain.com/network/redir?"], :root .jobs-information-call-to-action + .jobs-information-call-to-action div[class$="_item"], :root a[href^="http://servicegetbook.net/"], :root #rhs_block > #mbEnd, :root a[href^="http://cinema.friendscout24.de?"], :root [lazy-ad="lefttop_banner"], :root .__y_inner > .__y_item, :root a[href^="https://secure.cbdpure.com/aff/"], :root AMP-AD, :root a[href^="http://adclick.g.doubleclick.net/"], :root #main-content > [style="padding:10px 0 0 0 !important;"], :root #center_col > #resultStats + div[style="border:1px solid #dedede;margin-bottom:11px;padding:5px 7px 5px 6px"], :root div[class^="lifeOnwerAd"], :root a[data-oburl^="http://paid.outbrain.com/network/redir?"], :root iframe[src^="http://cdn1.adexprt.com/"], :root a[href^="http://dwn.pushtraffic.net/"], :root a[href$="/vghd.shtml"], :root a[href^="https://redirect.ero-advertising.com/"], :root a[href^="http://easydownload4you.com/"], :root a[href^="http://ffxitrack.com/"], :root #center_col > #main > .dfrd > .mnr-c > .c._oc._zs, :root a[href^="http://b.bestcompleteusa.info/"], :root .trc_rbox_div .syndicatedItemUB, :root #mn div[style="position:relative"] > #center_col > div > ._dPg, :root a[href^="http://www.myvpn.pro/"], :root a[href^="//www.pd-news.com/"], :root a[href^="http://www.pinkvisualpad.com/?revid="], :root a[href*=".clksite.com/"], :root a[href^="http://www.webtrackerplus.com/"], :root .GJJKPX2N1 > .GJJKPX2M1 > .GJJKPX2P4, :root #center_col > #taw > #tvcap > .cu-container > .commercial-unit-desktop-top, :root a[href^="http://centertrust.xyz/"], :root a[href^="https://intrev.co/"], :root div[id^="google_ads_iframe_"], :root .vi-lb-placeholder[title="ADVERTISEMENT"], :root a[href^="http://goldmoney.com/?gmrefcode="], :root a[href^="http://papi.mynativeplatform.com:80/pub2/"], :root LEADERBOARD-AD, :root #mn #center_col > div > h2.spon:first-child + ol:last-child, :root a[href^="https://bongacams2.com/track?"], :root a[href^="//zenhppyad.com/"], :root .gbfwa > div[class$="_item"], :root a[href^="http://www.menaon.com/installs/"], :root a[href^="http://taboola-"][href*="/redirect.php?app.type="], :root .mw > #rcnt > #center_col > #taw > .c, :root a[href^="http://api.content.ad/"], :root a[href*=".clkcln.com/"], :root .commercial-unit-desktop-rhs > .iKidV > .Ee92ae + .P2mpm + .hp3sk, :root a[href^="http://prochina.space/"], :root a[href^="http://www.uniblue.com/cm/"], :root a[href^="http://landingpagegenius.com/"], :root a[data-redirect^="http://click.plista.com/pets"], :root #rhs_block > script + .c._oc._Ve.rhsvw, :root .__zinit .__y_item, :root .ch[onclick="ga(this,event)"], :root a[href^="http://track.incognitovpn.com/"], :root .__ywl .__y_item, :root a[href^="http://track.trkvluum.com/"], :root a[href*="/adrotate-out.php?"], :root a[href^="http://linksnappy.com/?ref="], :root [src^="/Redirect.a2b?"], :root a[href^="http://www.torntvdl.com/"], :root #center_col > #resultStats + #tads, :root .__yinit .__y_item, :root .ra[align="left"][width="30%"], :root a[href^="https://trackjs.com/?utm_source"], :root AFS-AD, :root #cnt #center_col > #res > #topstuff > .ts, :root a[href^="https://landing.brazzersnetwork.com/"], :root .trc_rbox_div a[target="_blank"][href^="http://tab"], :root a[href^="http://www.firstclass-download.com/"], :root a[href*=".trust.zone"], :root a[href*="googleme.eu"], :root .mod > ._jH + .rscontainer, :root .GFYY1SVD2 > .GFYY1SVC2 > .GFYY1SVF5, :root a[href^="https://dcs.adgear.com/clicks/"], :root a[href^="http://affiliates.score-affiliates.com/"], :root #rhswrapper > #rhssection[border="0"][bgcolor="#ffffff"], :root .Mpopup + #Mad > #MadZone, :root a[href^="https://www.adxtro.com/"], :root #center_col > #\5f Emc, :root div[id^="dfp-ad-"], :root a[href^="http://ads2.williamhill.com/redirect.aspx?"], :root a[href^="https://www.spyoff.com/"], :root AD-TRIPLE-BOX, :root a[href^="//z6naousb.com/"], :root .rc-cta[data-target], :root #rhs_block > .ts[cellspacing="0"][cellpadding="0"][style="padding:0"], :root #header + #content > #left > #rlblock_left, :root a[href^="http://www.seekbang.com/cs/"], :root a[href^="http://syndication.exoclick.com/"], :root a[href^="http://bluehost.com/track/"], :root a[href^="https://squren.com/rotator/?atomid="], :root .nrelate .nr_partner, :root #center_col > #resultStats + #tads + #res + #tads, :root a[href^="//medleyads.com/spot/"], :root a[href*="mfroute.com/"], :root #rhs_block > ol > .rhsvw > .kp-blk > .xpdopen > ._OKe > ol > ._DJe > .luhb-div, :root a[href^="http://tezfiles.com/pr/"], :root a[href^="http://t.wowtrk.com/"], :root #center_col > #taw > #tvcap > .rscontainer, :root #main_col > #center_col div[style="font-size:14px;margin:0 4px;padding:1px 5px;background:#fff7ed"], :root a[href^="http://webtrackerplus.com/"], :root a[href^="http://clickandjoinyourgirl.com/"], :root #center_col > #res > #topstuff + #search > div > #ires > #rso > #flun, :root a[href^="http://www.sex.com/pics/?utm_"], :root a[href^="http://vo2.qrlsx.com/"], :root a[href^="http://engine.newsmaxfeednetwork.com/"], :root a[href^="http://ad.yieldmanager.com/"], :root a[href^="http://www.plus500.com/?id="], :root #flowplayer > div[style="z-index: 208; position: absolute; width: 300px; height: 275px; left: 222.5px; top: 85px;"], :root a[href^="http://ddownload39.club/"], :root a[href^="http://n217adserv.com/"], :root a[href^="//4c7og3qcob.com/"] { display: none !important; }</style></head><body class="article"><img class="logo" src="./Lab Guide_ Search Enhancement Using NLP_files/elastic-logo.svg" width="300">
+
+<!-- Include an extra training.js to make development easier. -->
+<script type="text/javascript" src="./Lab Guide_ Search Enhancement Using NLP_files/elastic_training.js(1).descarga"></script>
+
+
+<div id="header">
+<h1>Lab Guide: Search Enhancement Using NLP</h1>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/labs.html#lab1">Lab 1: Overview</a></li>
+<li><a href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/labs.html#lab2">Lab 2: NLP</a></li>
+<li><a href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/labs.html#lab3">Lab 3: Ingest Opennlp</a></li>
+<li><a href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/instructions/labs.html#lab4">Lab 4: Enhanced Search</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab1">Lab 1: Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Objective:</strong> In this lab, we are going to see how we can use Elasticsearch and
+NLP to improve your search. We are going to index documents with and without
+enrichment and compare the performance of the searches on the two different kind
+of documents.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Before starting let’s add data to our Elasticsearch cluster! First of all ssh
+into server1.</p>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>ssh server1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can extract Elasticsearch and Kibana:</p>
+</div>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>tar -zxf elasticsearch-6.4.1.tar.gz
+tar -zxf kibana-6.4.1-linux-x86_64.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start Elasticsearch in this tab using the following command:</p>
+</div>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>./elasticsearch-6.4.1/bin/elasticsearch -E network.host=0.0.0.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open a new terminal tab and start kibana:</p>
+</div>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>ssh server1
+./kibana-6.4.1-linux-x86_64/bin/kibana --host=0.0.0.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can now, go into Kibana, click <script language="JavaScript">
+if (window.location.host) {
+    document.write('<a target="_blank" href="/app/kibana#/management?_g=()" >here</a>' );
+} else {
+    document.write('<a target="_blank" href="http://localhost:5601/app/kibana#/management?_g=()">here</a>')
+}
+</script><a target="_blank" href="http://ec2-3-121-159-48.eu-central-1.compute.amazonaws.com/app/kibana#/management?_g=()">here</a></p>
+</div>
+<div class="paragraph">
+<p>Go into the "Dev tool":</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab1_console.png" alt="lab1 console"></span></p>
+</div>
+<div class="paragraph">
+<p>Let’s start by indexing some documents:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>POST test/_doc/_bulk
+{"index": {"_id":1}}
+{"message": "He became rich by selling his business."}
+{"index": {"_id":2}}
+{"message": "Rich visited the beautiful city of Rouen passing just in front of the cathedrale."}
+{"index": {"_id":3}}
+{"message": "Rich?? I don't think I am. I would even say that I'm poor."}
+{"index": {"_id":4}}
+{"message": "Rich and wealthy share similar meaning but may have different usage."}
+{"index": {"_id":5}}
+{"message": "One law for the rich another for the poor."}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let’s say that you want to retrieve the document speaking about Rich (the
+person). How can you do that? You could try to do a search query that will match
+"rich".</p>
+</div>
+<div class="openblock solution" id="solution0"><input id="question0" data-value="answer" type="button" value="Hide answer:"><div id="answer0" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test/_search
+{
+  "query": {
+    "match": {
+      "message": "rich"
+    }
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The document containing "Rich" the person has not scored well. It is actually
+the last one.</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>To improve the position of the document we could try to change the analyzer
+because after all, a first name always start with a upper case. Let’s create an
+<strong>index2</strong> for documents that will have a single field <strong>message</strong> analyzed using a
+custom analyzer with only a standard tokenizer, so no <strong>lowercasing</strong>.</p>
+<div class="openblock solution" id="solution1"><input id="question1" data-value="answer" type="button" value="Hide answer:"><div id="answer1" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT test2
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "simple_tokenizer": {
+          "type": "custom",
+          "tokenizer": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "_doc":{
+      "properties":{
+        "message": {
+          "type": "text",
+          "analyzer": "simple_tokenizer"
+        }
+      }
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Let’s reindex the documents in our <strong>test</strong> index into our <strong>test2</strong> index using
+the reindex API.</p>
+<div class="openblock solution" id="solution2"><input id="question2" data-value="answer" type="button" value="Show answer:"><div id="answer2" style="display: none;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>POST _reindex
+{
+  "dest": {
+    "index": "test2"
+  },
+  "source": {
+    "index": "test"
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Now that a new analysis has been applied to the documents let’s try to search
+for "Rich" with an upper case this time.</p>
+<div class="openblock solution" id="solution3"><input id="question3" data-value="answer" type="button" value="Show answer:"><div id="answer3" style="display: none;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test2/_search
+{
+  "query": {
+    "match": {
+      "message": "Rich"
+    }
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This time less documents are returned, but still, the one that are interesting
+for the problem are ranked last. How can it be improved?</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>NLP can solve this problem. What if the documents we have indexed previously
+had more information? Let’s reindex documents that contain Part Of Speech
+(POS) tag.</p>
+<div class="listingblock">
+<div class="content">
+<pre>POST test3/_doc/_bulk
+{"index": {"_id":1}}
+{"message": "He became rich by selling his business","enriched_message": "he_PRP became_VBD rich_JJ by_IN selling_VBG his_PRP$ business_NN"}
+{"index": {"_id":2}}
+{"message": "Rich visited the beautiful city of Rouen passing just in front of the cathedrale.","enriched_message": "rich_NNP visited_VBD the_DT beautiful_JJ city_NN of_IN Rouen_NNP passing_VBG just_RB in_IN front_NN of_IN the_DT cathedrale_NN."}
+{"index": {"_id":3}}
+{"message": "Rich?? I don't think I am. I would even say that I'm poor.","enriched_message": "rich_JJ?? i_PRP do_VBP n't_RB think_VB i_PRP am_VBP. i_PRP would_MD even_RB say_VB that_IN I_PRP 'm_VBP poor_JJ."}
+{"index": {"_id":4}}
+{"message": "Rich and wealthy share similar meaning but may have different usage.","enriched_message": "rich_JJ and_CC wealthy_JJ share_VB similar_JJ meaning_NN but_CC may_MD have_VB different_JJ usage_NN."}
+{"index": {"_id":5}}
+{"message": "One law for the rich another for the poor.","enriched_message": "one_CD law_NN for_IN the_DT rich_JJ another_DT for_IN the_DT poor_JJ."}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now we can search for "Rich" as a proper noun. Do a search query to target the
+proper noun Rich (the tag for a proper noun is NNP).</p>
+<div class="openblock solution" id="solution4"><input id="question4" data-value="answer" type="button" value="Hide answer:"><div id="answer4" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test3/_search
+{
+  "query": {
+    "match": {
+      "enriched_message": "rich_NNP"
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>This search give us the expected result but it give us only one document. Do a
+query that will give us the expected document ranked number one and all the other
+documents that contain Rich but not as a pronoun.</p>
+<div class="openblock solution" id="solution5"><input id="question5" data-value="answer" type="button" value="Hide answer:"><div id="answer5" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test3/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "message": "rich"
+          }
+        }
+      ],
+      "should": [
+        {
+          "match": {
+            "enriched_message": "rich_NNP"
+          }
+        }
+      ]
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>That was one example where NLP can help improving search. Let’s see another
+example, this time using entity recognition. The following document contains
+multiple entity:</p>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "message" : "Kobe Bryant was one of the best basketball players of all times. Not even Michael Jordan has ever scored 81 points in one game. Munich is really an awesome city, but New York is as well. Yesterday has been the hottest day of the year."
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It contains the following: "Kobe Bryant", "Michael Jordan", "Munich", "New York"
+, "Yersteday". Some informations are dates, some are names and others are
+locations. Being able to automatically detect and extract those informations can
+be very powerful.</p>
+</div>
+</li>
+<li>
+<p>Let’s index some documents that don’t have enrichment.</p>
+<div class="listingblock">
+<div class="content">
+<pre>POST test4/_doc/_bulk
+{"index": {"_id":1}}
+{"message": "Nathan is living in the busy city of New York"}
+{"index": {"_id":2}}
+{"message": "Bill is going to visit Marc in the city of New York"}
+{"index": {"_id":3}}
+{"message": "Bill doesn't really like the city of New York and prefer the calm state of Missouri"}
+{"index": {"_id":4}}
+{"message": "The catacombes are like a small city under Paris, this is Melvyn's favorite place."}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>How can we build a query that run a term aggregation on the documents that
+contain "New York"? First build a query that target the documents containing
+"New York".</p>
+</div>
+<div class="openblock solution" id="solution6"><input id="question6" data-value="answer" type="button" value="Hide answer:"><div id="answer6" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test4/_search
+{
+  "query": {
+    "match": {
+      "message": "new york"
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+<div class="paragraph">
+<p>3 documents mention New York. Now if you want to do the same thing for every
+locations in your data, it will be hard. A query will need to be be done for
+every single location.</p>
+</div>
+</li>
+<li>
+<p>Instead of iterating on every locations present in our documents, we could
+process those documents and enrich them. Let’s do it:</p>
+<div class="listingblock">
+<div class="content">
+<pre>POST test5/_doc/_bulk
+{"index": {"_id":1}}
+{"message": "Nathan is living in the busy city of New York", "entities" : {"locations" : ["New York"], "names" : [ "Nathan"]}}
+{"index": {"_id":2}}
+{"message": "Bill is going to visit Marc in the city of New York", "entities" : {"locations" : ["New York"], "names" : [ "Bill", "Marc"]}}
+{"index": {"_id":3}}
+{"message": "Bill doesn't really like the city of New York and prefer the calm state of Missouri", "entities" : {"locations" : ["New York", "Missouri"], "names" : [ "Bill"]}}
+{"index": {"_id":4}}
+{"message": "The catacombes are like a small city under Paris, this is Melvyn's favorite place.", "entities" : {"locations" : ["Paris"], "names" : ["Melvyn"]}}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Instead of doing a query, a term aggregation can be done on the field
+<strong>entities.names.keyword</strong>.</p>
+<div class="openblock solution" id="solution7"><input id="question7" data-value="answer" type="button" value="Hide answer:"><div id="answer7" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET test5/_search
+{
+  "aggs": {
+    "entities_name": {
+      "terms": {
+        "field": "entities.locations.keyword",
+        "size": 10
+      }
+    }
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is 3 documents about New York, 1 about Paris and 1 about Missouri.</p>
+</div>
+</div>
+</div></div>
+<div class="paragraph">
+<p><strong>Summary:</strong> It’s over! In this unit you saw how NLP can help in many ways.
+Enriching your documents will improve the quality of your searches, having more
+structure in your data on unstructured fields (text fields) can be powerful and
+improve your analytic. In the next unit you are going to learn how to use a NLP
+solution to enrich your documents.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_end_of_lab_1">End of Lab 1</h3>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab2">Lab 2: NLP</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Objective:</strong> In this lab, we are going to see how we can use enriched documents
+to enhance the search experience. NLTK is going to be uses in order to do the
+enrichment.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In order to enrich our documents we are going to need an application that do
+POS tagging or entity detection. Hopefully one is already built. Let’s use it.
+In the <strong>nlp_api</strong> folder there is a <strong>requirements.txt</strong> file. Run the following:</p>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>virtualenv -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Now that we have our virtual environment set up with all the dependencies, let’s
+download some required ressources form nltk:</p>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>python
+import nltk
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+exit()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start the API that will enrich the documents:</p>
+</div>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>python nlp_api.py</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The API should be up and running. Let’s work with the following data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "original": "John is rich, he just won the lottery."
+}
+
+{
+  "original": "Rich is an Elasticsearch certified engineer."
+}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Index those two documents.</p>
+<div class="openblock solution" id="solution8"><input id="question8" data-value="answer" type="button" value="Hide answer:"><div id="answer8" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT no_nlp/_doc/1
+{
+  "original": "John is rich, he just won the lottery."
+}
+
+PUT no_nlp/_doc/2
+{
+  "original": "Rich is an Elasticsearch certified engineer."
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Do a search for "rich" in the index <strong>no_nlp</strong>.</p>
+<div class="openblock solution" id="solution9"><input id="question9" data-value="answer" type="button" value="Hide answer:"><div id="answer9" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET no_nlp/_search
+{
+  "query": {
+    "match": {
+      "original": "rich"
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>What is the POS tag of "rich" in the first and second document?</p>
+<div class="openblock solution" id="solution10"><input id="question10" data-value="answer" type="button" value="Hide answer:"><div id="answer10" style="display: block;">
+<div class="content">
+<div class="paragraph">
+<p>In the first document rich is an adjective: JJ
+In the second document rich is a noun: NN and even a first name so: NNP</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Let’s see if our API can detect it. Using <strong>curl</strong> send a <strong>POST</strong> request on:
+<strong><a href="http://localhost:5000/pos_tag" class="bare">http://localhost:5000/pos_tag</a></strong>. Pass along the document that you want to
+analyze into the body using the <strong>submit</strong> key.</p>
+<div class="openblock solution" id="solution11"><input id="question11" data-value="answer" type="button" value="Hide answer:"><div id="answer11" style="display: block;">
+<div class="content">
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>curl -d '{"submit":"John is rich, he just won the lottery."}' -H "Content-Type: application/json" -X POST http://localhost:5000/pos_tag
+curl -d '{"submit":"Rich is an Elasticsearch certified engineer."}' -H "Content-Type: application/json" -X POST http://localhost:5000/pos_tag</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Index the two resulting documents in the <strong>nlp_pos_tag</strong> index.</p>
+<div class="openblock solution" id="solution12"><input id="question12" data-value="answer" type="button" value="Hide answer:"><div id="answer12" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT nlp_pos_tag/_doc/1
+{
+  "enriched": "John_NNP is_VBZ rich_JJ ,_, he_PRP just_RB won_VBD the_DT lottery_NN ._.",
+  "original": "John is rich, he just won the lottery."
+}
+
+PUT nlp_pos_tag/_doc/2
+{
+  "enriched": "Rich_NNP is_VBZ an_DT Elasticsearch_NNP certified_VBD engineer_NN ._.",
+  "original": "Rich is an Elasticsearch certified engineer."
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Search for rich as a noun.</p>
+<div class="openblock solution" id="solution13"><input id="question13" data-value="answer" type="button" value="Hide answer:"><div id="answer13" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET nlp_pos_tag/_search
+{
+  "query": {
+    "match": {
+      "enriched": "rich_nnp"
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>We only did POS tagging so far. Let’s try to do some named entity recognition.
+In the API that you start earlier there is another endpoint available:
+<strong><a href="http://localhost:5000/entity" class="bare">http://localhost:5000/entity</a></strong>. Let’s use this endpoint on the following texts:</p>
+<div class="listingblock">
+<div class="content">
+<pre>Tom and Jerry are fighting over a piece of cheese worth 5$.
+Elastic founded in 2012 in Amsterdam is behind Elasticsearch.
+Jerry and Bob are going to join Elastic.</pre>
+</div>
+</div>
+<div class="openblock solution" id="solution14"><input id="question14" data-value="answer" type="button" value="Hide answer:"><div id="answer14" style="display: block;">
+<div class="content">
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>curl -d '{"submit":"Jerry is working for the company since a long time."}' -H "Content-Type: application/json" -X POST http://localhost:5000/entity
+curl -d '{"submit":"Tom and Jerry are fighting over a piece of cheese worth 5$."}' -H "Content-Type: application/json" -X POST http://localhost:5000/entity
+curl -d '{"submit":"Jerry and Bob are going to join the company in London"}' -H "Content-Type: application/json" -X POST http://localhost:5000/entity</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Index the resulting documents inside the index nlp_entity.</p>
+<div class="openblock solution" id="solution15"><input id="question15" data-value="answer" type="button" value="Hide answer:"><div id="answer15" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT nlp_entity/_doc/1
+{
+  "entities": {
+    "PERSON": [
+      "Jerry"
+    ]
+  },
+  "original": "Jerry is working for the company since a long time."
+}
+
+PUT nlp_entity/_doc/2
+{
+  "entities": {
+    "PERSON": [
+      "Tom",
+      "Jerry"
+    ]
+  },
+  "original": "Tom and Jerry are fighting over a piece of cheese worth 5$."
+}
+
+PUT nlp_entity/_doc/3
+{
+  "entities": {
+    "GPE": [
+      "London"
+    ],
+    "PERSON": [
+      "Jerry",
+      "Bob"
+    ]
+  },
+  "original": "Jerry and Bob are going to join the company in London"
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>The texts were previously unstructured. More structure has been added to the
+documents. What is the most frequent name in our documents?</p>
+<div class="openblock solution" id="solution16"><input id="question16" data-value="answer" type="button" value="Hide answer:"><div id="answer16" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET nlp_entity/_search
+{
+  "size": 0,
+  "aggs": {
+    "name_count": {
+      "terms": {
+        "field": "entities.PERSON.keyword"
+      }
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Summary:</strong> Well done. You just saw how we can use an external API to enrich
+documents using POS tagging and named entity recognition. Some information are
+lost during the indexing because of the automatic mapping. Because the
+enrichment is done using an external API we had to define the tokenizer in the
+application, we need to reflect that in our Elasticsearch mapping accordingly.</p>
+</div>
+<div class="sect2">
+<h3 id="_end_of_lab_2">End of Lab 2</h3>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab3">Lab 3: Ingest Opennlp</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Objective:</strong> Ingest pipelines allow the processing of documents before
+indexation in Elasticsearch. In this lab we are going to use the Opennlp ingest
+pipeline in order to enrich documents with NLP information. This pipeline
+will do named entity extraction and add new fields to the indexed documents.
+This lab is going to guide you along on how you can install, use and configure
+your pipeline.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Before installing a plugin make sure to stop your Elasticsearch node.</p>
+</li>
+<li>
+<p>Now that Elasticsearch is not running anymore you should install the ingest
+pipeline plugin. To do that use the Elasticsearch script plugin manager.</p>
+<div class="openblock solution" id="solution17"><input id="question17" data-value="answer" type="button" value="Hide answer:"><div id="answer17" style="display: block;">
+<div class="content">
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>elasticsearch-6.4.1/bin/elasticsearch-plugin install https://github.com/spinscale/elasticsearch-ingest-opennlp/releases/download/6.4.1.1/ingest-opennlp-6.4.1.1.zip</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should take few seconds to be installed.</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>The plugin come with models to do named entity extraction. You need to
+specify which model you want to use in the <strong>elasticsearch.yml</strong> file. Update
+the file to add those parameters then restart Elasticsearch:</p>
+<div class="listingblock">
+<div class="content">
+<pre>ingest.opennlp.model.file.persons: en-ner-persons.bin
+ingest.opennlp.model.file.dates: en-ner-dates.bin
+ingest.opennlp.model.file.locations: en-ner-locations.bin</pre>
+</div>
+</div>
+<div class="openblock solution" id="solution18"><input id="question18" data-value="answer" type="button" value="Hide answer:"><div id="answer18" style="display: block;">
+<div class="content">
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>vim config/elasticsearch.yml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy paste the above parameters and restart Elasticsearch.</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>If we configure an ingest pipeline, it will now have the possibility of
+detecting persons, dates and locations. Let’s configure an ingest pipeline
+called <strong>per_dat_loc_extraction</strong> that do the above. Give him the following
+description: "<strong>A pipeline to do dates, locations and persons extraction</strong>".
+The pipeline must process the <strong>original</strong> field.</p>
+<div class="openblock solution" id="solution19"><input id="question19" data-value="answer" type="button" value="Hide answer:"><div id="answer19" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT _ingest/pipeline/per_dat_loc_extraction
+{
+  "description": "A pipeline to do dates, locations and persons extraction",
+  "processors": [
+    {
+      "opennlp" : {
+        "field" : "original"
+      }
+    }
+  ]
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>You just created an ingest pipeline that do named entity extraction. Let’s
+use it!</p>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "original" : "John Smith has been working in New York since September 2015"
+}
+
+{
+  "original" : "Paris is the capitol of France."
+}
+
+{
+  "original" : "John Smith founded the company in 2012"
+}</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Index the above documents in an index called <strong>ingest_pipeline_index</strong> using
+the pipeline we defined perviously.</p>
+<div class="openblock solution" id="solution20"><input id="question20" data-value="answer" type="button" value="Hide answer:"><div id="answer20" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT ingest_pipeline_index/_doc/1?pipeline=per_dat_loc_extraction
+{
+  "original" : "John Smith has been working in New York since September 2015"
+}
+
+PUT ingest_pipeline_index/_doc/2?pipeline=per_dat_loc_extraction
+{
+  "original" : "Paris is the capitol of France."
+}
+
+PUT ingest_pipeline_index/_doc/3?pipeline=per_dat_loc_extraction
+{
+  "original" : "John Smith founded the company in 2012"
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Retrieve the document you just indexed and look at their new fields.</p>
+<div class="openblock solution" id="solution21"><input id="question21" data-value="answer" type="button" value="Hide answer:"><div id="answer21" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET ingest_pipeline_index/_search</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first document has three new fields: <strong>entities.persons</strong>,
+<strong>entities.locations</strong> and <strong>entities.dates</strong>. The second document has one new
+field: <strong>entities.locations</strong>. The third documents has two new fields:
+<strong>entities.persons</strong> and <strong>entities.dates</strong>.</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Let’s define another ingest pipeline but this time, your pipeline will only
+detect locations. Call this new pipeline: <strong>loc_extraction</strong> and give it the
+following description: "<strong>A pipeline to do locations extraction</strong>"</p>
+<div class="openblock solution" id="solution22"><input id="question22" data-value="answer" type="button" value="Hide answer:"><div id="answer22" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT _ingest/pipeline/loc_extraction
+{
+  "description": "A pipeline to do locations extraction",
+  "processors": [
+    {
+      "opennlp" : {
+        "field" : "original",
+        "fields" : [ "locations" ]
+      }
+    }
+  ]
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Reindex the previous documents using <strong>loc_extraction</strong> pipeline.</p>
+<div class="openblock solution" id="solution23"><input id="question23" data-value="answer" type="button" value="Hide answer:"><div id="answer23" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT ingest_pipeline_index/_doc/1?pipeline=loc_extraction
+{
+  "original" : "John Smith has been working in New York since September 2015"
+}
+
+PUT ingest_pipeline_index/_doc/2?pipeline=loc_extraction
+{
+  "original" : "Paris is the capitol of France."
+}
+
+PUT ingest_pipeline_index/_doc/3?pipeline=loc_extraction
+{
+  "original" : "John Smith founded the company in 2012"
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can have a look at the reindexed documents by using the <strong>_search</strong> endpoint.</p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Now what is happening if you index the following document using per_dat_loc_extraction pipeline:</p>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "original" : "Goldman Sachs was founded in 1869"
+}</pre>
+</div>
+</div>
+<div class="openblock solution" id="solution24"><input id="question24" data-value="answer" type="button" value="Show answer:"><div id="answer24" style="display: none;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT ingest_pipeline_index/_doc/4?pipeline=per_dat_loc_extraction
+{
+  "original" : "Goldman Sachs was founded in 1869"
+}
+
+GET ingest_pipeline_index/_doc/4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The fact that a company name is present and not detected can be an issue.
+There is only one new field that has been created: <strong>entities.dates</strong></p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Let’s add a model that can detect organizations. In the folder <strong>datasets</strong>
+there is a file that contains a model to detect organizations. Move this file in
+the folder <strong>config/ingest-opennlp</strong> in the elasticsearch repository.</p>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>mv datasets/en-ner-organization.bin elasticsearch-6.4.1/config/ingest-opennlp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now stop your Elasticsearch node and update your configuration file
+<strong>elasticsearch.yml</strong> and add the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ingest.opennlp.model.file.organizations: en-ner-organization.bin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create an ingest pipeline called <strong>per_dat_loc_org_extraction</strong></p>
+</div>
+<div class="openblock solution" id="solution25"><input id="question25" data-value="answer" type="button" value="Hide answer:"><div id="answer25" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT _ingest/pipeline/per_dat_loc_org_extraction
+{
+  "description": "A pipeline to do dates, locations, persons and organizations extraction",
+  "processors": [
+    {
+      "opennlp" : {
+        "field" : "original"
+      }
+    }
+  ]
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Index the document using the new pipeline. What changed?</p>
+<div class="openblock solution" id="solution26"><input id="question26" data-value="answer" type="button" value="Hide answer:"><div id="answer26" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT ingest_pipeline_index/_doc/4?pipeline=per_dat_loc_extraction
+{
+  "original" : "Goldman Sachs was founded in 1869"
+}
+
+GET ingest_pipeline_index/_doc/4</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will output the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "_index": "ingest_pipeline_index",
+  "_type": "_doc",
+  "_id": "4",
+  "_version": 2,
+  "found": true,
+  "_source": {
+    "original": "Goldman Sachs was founded in 2000",
+    "entities": {
+      "organizations": [
+        "Goldman Sachs"
+      ],
+      "dates": [
+        "2000"
+      ]
+    }
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A new organizations field is present and contains the detected organization.
+"Goldman Sachs".</p>
+</div>
+</div>
+</div></div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Summary:</strong> This is the end of the third lab! Congratulation! One more lab to go.
+Now that we can enrich our documents using ingest pipeline directly inside
+Elasticsearch, let’s see how we can leverage those enriched documents to improve
+our searches and do visualizations. We are going to see as well what are the
+limit and improvements to this system that can be done.
+=== End of Lab 3
+'''</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="lab4">Lab 4: Enhanced Search</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Objective:</strong> In the previous labs you learned how to use a client to enrich your
+document using NLP (POS tagging and named entity recognition), then we saw how
+to use opennlp ingest pipeline to do named entity recognition directly on our
+documents before indexation. In this lab we are going to see some tips in order
+to leverage those information in our searches.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>We are going to index a bunch of documents. Let’s first have a look at it! In
+the datasets folder there is a file called: sample.txt.</p>
+<div class="listingblock">
+<div class="content">
+<pre>cut -c-500 sample.txt</pre>
+</div>
+</div>
+</li>
+<li>
+<p>We want to apply NLP on those documents. So let’s define an ingest pipeline
+called: <strong>lab4_ingest_pipeline</strong>. This pipeline will do person and location
+detection.</p>
+<div class="openblock solution" id="solution27"><input id="question27" data-value="answer" type="button" value="Hide answer:"><div id="answer27" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT _ingest/pipeline/lab4_ingest_pipeline
+{
+  "description": "A pipeline to do locations and persons recognition",
+  "processors": [
+    {
+      "opennlp" : {
+        "field" : "original",
+        "fields" : [ "locations", "persons" ]
+      }
+    }
+  ]
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Launch the scripts: <strong>scripts/lab4_index.py</strong>, it will index the document
+that you previously looked at. Make sure that you are in the virtual env before
+launching the script. You should see something before the command line in the
+terminal: <strong>(venv)</strong></p>
+<div class="listingblock bash">
+<div class="content">
+<pre class="highlight"><code>python scripts/lab4_index.py</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Using the ingest pipeline our documents went from an unstructured form to a
+more structured form. We can view it using a visualization inside Kibana.
+<strong>Create an index pattern</strong>, go into: <strong>Visualization</strong>,
+<strong>Create a new visualization</strong>, <strong>Vertical bar chart</strong>, display on the Y-axis
+the most frequent locations using a terms aggregation.</p>
+<div class="openblock solution" id="solution28"><input id="question28" data-value="answer" type="button" value="Hide answer:"><div id="answer28" style="display: block;">
+<div class="content">
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_1.png" alt="lab4 1"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_2.png" alt="lab4 2"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_3.png" alt="lab4 3"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_4.png" alt="lab4 4"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_5.png" alt="lab4 5"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_6.png" alt="lab4 6"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_7.png" alt="lab4 7"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./Lab Guide_ Search Enhancement Using NLP_files/lab4_8.png" alt="lab4 8"></span></p>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Now if the NLP for our documents is done on the client side that means that
+you defined your analyzer (tokenizer included) on the client side. You should
+take this into consideration while building the mapping for those documents in
+order to avoid a double analysis (and tokenization). Let’s say you have the
+following document that is sent by your client.</p>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "enriched": "John_NNP is_VBZ rich_JJ ,_, he_PRP just_RB won_VBD the_DT lottery_NN ._.",
+  "original": "John is rich, he just won the lottery."
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You ideally don’t want to reanalyzed and retokenized the <strong>enriched</strong> field.
+Build a mapping for an index called <strong>e_commerce</strong> and a document type <strong>_doc</strong>
+that will preserve the token provided in the <strong>enriched</strong> field and index them
+as they are.</p>
+</div>
+<div class="openblock solution" id="solution29"><input id="question29" data-value="answer" type="button" value="Hide answer:"><div id="answer29" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT e_commerce
+{
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "original": {
+          "type": "text"
+        },
+        "enriched": {
+          "type": "text",
+          "analyzer": "whitespace"
+        }
+      }
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Now let’s index some documents on which we applied some NLP that detect
+relationships between words inside the index you just created.</p>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "original": "There is a discount on all black shoes",
+  "enriched": "There is a discount on all black_shoes shoes"
+}
+
+{
+  "original": "Huge discount on black T-shirts and white shoes",
+  "enriched": "Huge_discount discount on black_T-shirts T-shirts and white_shoes shoes"
+}
+
+{
+  "original": "I sell those nice white shoes",
+  "enriched": "I sell those nice_shoes white_shoes shoes"
+}</pre>
+</div>
+</div>
+<div class="openblock solution" id="solution30"><input id="question30" data-value="answer" type="button" value="Hide answer:"><div id="answer30" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>PUT e_commerce/_doc/1
+{
+  "original": "There is a discount on all black shoes",
+  "enriched": "There is a discount on all black_shoes shoes"
+}
+
+PUT e_commerce/_doc/2
+{
+  "original": "Huge discount on black T-shirts and white shoes",
+  "enriched": "Huge_discount discount on black_T-shirts T-shirts and white_shoes shoes"
+}
+
+PUT e_commerce/_doc/3
+{
+  "original": "I sell those nice white shoes",
+  "enriched": "I sell those nice_shoes white_shoes shoes"
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+<li>
+<p>Let’s say that one of the user is trying to do the following search: <strong>black
+shoes</strong>. Do a search to retrieve the most relevant documents.</p>
+<div class="paragraph">
+<p>Having issues? If you are doing a search on the original field then you will
+retrieve all the documents. If you are doing a search on the enriched field,
+then you are going to match all the documents as well. The problem is that no
+NLP has been applied on the search request. Now if we apply NLP on the search
+request this is what the request will probably look like: <strong>black_shoes shoes</strong>.
+Now do a search using this processed search.</p>
+</div>
+<div class="openblock solution" id="solution31"><input id="question31" data-value="answer" type="button" value="Hide answer:"><div id="answer31" style="display: block;">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>GET e_commerce/_doc/_search
+{
+  "query": {
+    "match": {
+      "enriched": "black_shoes shoes"
+    }
+  }
+}</pre>
+</div>
+</div>
+</div>
+</div></div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Summary:</strong> This is the end of the 4th lab. You should have enough knowledge to
+implement such a solution inside your own cluster. Don’t forget that the best
+solutions rely most of the time on your own datasets.</p>
+</div>
+<div class="sect2">
+<h3 id="_end_of_lab_4">End of Lab 4</h3>
+<hr>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+<script type="text/javascript"> build_solutions()</script>
+<p>© Elasticsearch BV 2015-2018. All rights reserved. Decompiling, copying, publishing and/or distribution without written consent of Elasticsearch BV is strictly prohibited.</p>
+
+<div id="SLG_balloon_obj" alt="0" style="display: block;"><div id="SLG_button" class="SLG_ImTranslatorLogo" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/imtranslator-s.png&quot;); display: none;"></div><div id="SLG_shadow_translation_result2" style="display: none;"></div><div id="SLG_shadow_translator" style="left: -10000px; top: -10000px; display: none;"><div id="SLG_planshet"><div id="SLG_arrow_up" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/up.png&quot;);"></div><div style="visibility:hidden;" id="SLG_Bproviders"></div><div id="SLG_alert_bbl" style="display: none;"><div id="SLHKclose" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/delete.png&quot;);"></div><div id="SLG_alert_cont"></div></div><div id="SLG_TB"><table id="SLG_tables" cellspacing="1"><tr><td class="SLG_td" width="10%" align="right"><input id="SLG_locer" type="checkbox" title="Fijar idioma"></td><td class="SLG_td" width="20%" align="left"><select id="SLG_lng_from" class="SLG_lngs"><option value="auto">Detectar idioma</option><option value="af">Afrikáans</option><option value="sq">Albanés</option><option value="de">Alemán</option><option value="am">Amhárico</option><option value="ar">Árabe</option><option value="hy">Armenio</option><option value="az">Azerí</option><option value="bn">Bengalí</option><option value="be">Bielorruso</option><option value="my">Birmano</option><option value="bs">Bosnio</option><option value="bg">Búlgaro</option><option value="km">Camboyano</option><option value="kn">Canarés</option><option value="ca">Catalán</option><option value="ceb">Cebuano</option><option value="cs">Checo</option><option value="ny">Chichewa</option><option value="zh-CN">Chino simp</option><option value="zh-TW">Chino trad</option><option value="si">Cincalés</option><option value="ko">Coreano</option><option value="co">Corso</option><option value="ht">Criollo haitiano</option><option value="hr">Croata</option><option value="da">Danés</option><option value="sk">Eslovaco</option><option value="sl">Esloveno</option><option value="es">Español</option><option value="eo">Esperanto</option><option value="et">Estonio</option><option value="eu">Euskera</option><option value="fi">Finlandés</option><option value="fr">Francés</option><option value="fy">Frisio</option><option value="gd">Gaélico escocés</option><option value="cy">Galés</option><option value="gl">Gallego</option><option value="ka">Georgiano</option><option value="el">Griego</option><option value="gu">Gujarati</option><option value="ha">Hausa</option><option value="haw">Hawaiano</option><option value="iw">Hebreo</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="nl">Holandés</option><option value="hu">Húngaro</option><option value="ig">Igbo</option><option value="id">Indonesio</option><option value="en">Inglés</option><option value="ga">Irlandés</option><option value="is">Islandés</option><option value="it">Italiano</option><option value="ja">Japonés</option><option value="jw">Javanés</option><option value="kk">Kazajo</option><option value="ky">Kirguís</option><option value="ku">Kurdo</option><option value="lo">Lao</option><option value="la">Latín</option><option value="lv">Letón</option><option value="lt">Lituano</option><option value="lb">Luxemburgués</option><option value="mk">Macedonio</option><option value="ml">Malayalam</option><option value="ms">Malayo</option><option value="mg">Malgache</option><option value="mt">Maltés</option><option value="mi">Maorí</option><option value="mr">Maratí</option><option value="mn">Mongol</option><option value="ne">Nepalí</option><option value="no">Noruego</option><option value="pa">Panyabí</option><option value="ps">Pastún</option><option value="fa">Persa</option><option value="pl">Polaco</option><option value="pt">Portugués</option><option value="ro">Rumano</option><option value="ru">Ruso</option><option value="sm">Samoano</option><option value="sr">Serbio</option><option value="st">Sesoto</option><option value="sn">Shona</option><option value="sd">Sindhi</option><option value="so">Somalí</option><option value="sw">Suajili</option><option value="sv">Sueco</option><option value="su">Sundanés</option><option value="tl">Tagalo</option><option value="th">Tailandés</option><option value="ta">Tamil</option><option value="tg">Tayiko</option><option value="te">Telugu</option><option value="tr">Turco</option><option value="uk">Ucraniano</option><option value="ur">Urdu</option><option value="uz">Uzbeco</option><option value="vi">Vietnamita</option><option value="xh">Xhosa</option><option value="yi">Yidis</option><option value="yo">Yoruba</option><option value="zu">Zulú</option></select></td><td class="SLG_td" width="3" align="center"><div id="SLG_switch_b" title="Cambiar idiomas" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/switchb.png&quot;);"></div></td><td class="SLG_td" width="20%" align="left"><select id="SLG_lng_to" class="SLG_lngs"><option value="af">Afrikáans</option><option value="sq">Albanés</option><option value="de">Alemán</option><option value="am">Amhárico</option><option value="ar">Árabe</option><option value="hy">Armenio</option><option value="az">Azerí</option><option value="bn">Bengalí</option><option value="be">Bielorruso</option><option value="my">Birmano</option><option value="bs">Bosnio</option><option value="bg">Búlgaro</option><option value="km">Camboyano</option><option value="kn">Canarés</option><option value="ca">Catalán</option><option value="ceb">Cebuano</option><option value="cs">Checo</option><option value="ny">Chichewa</option><option value="zh-CN">Chino simp</option><option value="zh-TW">Chino trad</option><option value="si">Cincalés</option><option value="ko">Coreano</option><option value="co">Corso</option><option value="ht">Criollo haitiano</option><option value="hr">Croata</option><option value="da">Danés</option><option value="sk">Eslovaco</option><option value="sl">Esloveno</option><option selected="selected" value="es">Español</option><option value="eo">Esperanto</option><option value="et">Estonio</option><option value="eu">Euskera</option><option value="fi">Finlandés</option><option value="fr">Francés</option><option value="fy">Frisio</option><option value="gd">Gaélico escocés</option><option value="cy">Galés</option><option value="gl">Gallego</option><option value="ka">Georgiano</option><option value="el">Griego</option><option value="gu">Gujarati</option><option value="ha">Hausa</option><option value="haw">Hawaiano</option><option value="iw">Hebreo</option><option value="hi">Hindi</option><option value="hmn">Hmong</option><option value="nl">Holandés</option><option value="hu">Húngaro</option><option value="ig">Igbo</option><option value="id">Indonesio</option><option value="en">Inglés</option><option value="ga">Irlandés</option><option value="is">Islandés</option><option value="it">Italiano</option><option value="ja">Japonés</option><option value="jw">Javanés</option><option value="kk">Kazajo</option><option value="ky">Kirguís</option><option value="ku">Kurdo</option><option value="lo">Lao</option><option value="la">Latín</option><option value="lv">Letón</option><option value="lt">Lituano</option><option value="lb">Luxemburgués</option><option value="mk">Macedonio</option><option value="ml">Malayalam</option><option value="ms">Malayo</option><option value="mg">Malgache</option><option value="mt">Maltés</option><option value="mi">Maorí</option><option value="mr">Maratí</option><option value="mn">Mongol</option><option value="ne">Nepalí</option><option value="no">Noruego</option><option value="pa">Panyabí</option><option value="ps">Pastún</option><option value="fa">Persa</option><option value="pl">Polaco</option><option value="pt">Portugués</option><option value="ro">Rumano</option><option value="ru">Ruso</option><option value="sm">Samoano</option><option value="sr">Serbio</option><option value="st">Sesoto</option><option value="sn">Shona</option><option value="sd">Sindhi</option><option value="so">Somalí</option><option value="sw">Suajili</option><option value="sv">Sueco</option><option value="su">Sundanés</option><option value="tl">Tagalo</option><option value="th">Tailandés</option><option value="ta">Tamil</option><option value="tg">Tayiko</option><option value="te">Telugu</option><option value="tr">Turco</option><option value="uk">Ucraniano</option><option value="ur">Urdu</option><option value="uz">Uzbeco</option><option value="vi">Vietnamita</option><option value="xh">Xhosa</option><option value="yi">Yidis</option><option value="yo">Yoruba</option><option value="zu">Zulú</option></select></td><td class="SLG_td" width="5%" align="center"> </td><td class="SLG_td" width="8%" align="center"><div id="SLG_TTS_voice" title="undefined" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/ttsvoice.png&quot;);"></div></td><td class="SLG_td" width="8%" align="center"><div id="SLG_copy" title="Copiar" class="SLG_copy" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/copy.png&quot;);"></div></td><td class="SLG_td" width="8%" align="center"><div id="SLG_bbl_font_patch"></div><div id="SLG_bbl_font" title="Тamaño de fuente" class="SLG_bbl_font" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/font.png&quot;);"></div></td><td class="SLG_td" width="8%" align="center"><div id="SLG_bbl_help" title="Ayuda" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/bhelp.png&quot;);"></div></td><td class="SLG_td" width="15%" align="right"><div id="SLG_pin" class="SLG_pin_off" title="Fijar la ventana de traducción" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/pin-on.png&quot;);"></div></td></tr></table></div></div><div id="SLG_shadow_translation_result" style="visibility: visible;"></div><div id="SLG_loading" class="SLG_loading" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/loading.gif&quot;);"></div><div id="SLG_player2"></div><div id="SLG_alert100">La función de sonido está limitada a 200 caracteres</div><div id="SLG_Balloon_options" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/bg3.png&quot;) rgb(255, 255, 255);"><div id="SLG_arrow_down" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/down.png&quot;);"></div><table id="SLG_tbl_opt" width="100%"><tr><td class="SLG_td" width="5%" align="center"><input id="SLG_BBL_locer" type="checkbox" checked="1" title="Mostrar el botón ImTranslator 3 segundos"></td><td class="SLG_td" width="5%" align="left"><div id="SLG_BBL_IMG" title="Mostrar el botón ImTranslator 3 segundos" style="background: url(&quot;chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/img/util/bbl-logo.png&quot;);"></div></td><td class="SLG_td" width="70%" align="center"><a href="chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/html/options/options.html?bbl" target="_blank" class="SLG_options" title="Mostrar opciones">Opciones</a> : <a href="chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/html/options/options.html?hist" target="_blank" class="SLG_options" title="Historial de traducciones">Historia</a> : <a href="chrome-extension://mchdgimobfnilobnllpdnompfjkkfdmi/content/html/options/options.html?feed" target="_blank" class="SLG_options" title="ImTranslator Feedback">Feedback</a> : <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=GD9D8CPW8HFA2" target="_blank" class="SLG_options" title="Hacer una contribución">Donate</a></td><td class="SLG_td" width="15%" align="right"><span id="SLG_Balloon_Close" class="SLG_options" title="Cerrar">Cerrar</span></td></tr></table></div></div></div></body></html>
