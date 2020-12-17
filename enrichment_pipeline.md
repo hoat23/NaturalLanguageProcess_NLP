@@ -7,15 +7,11 @@ PUT diccionario_sectores
 {
   "mappings": {
     "properties" : {
-        "company" : {
-          "properties" : {
-            "label" : {
+        "label" : {
               "type" : "keyword"
-            },
-            "sector" : {
+        },
+        "sector" : {
               "type" : "keyword"
-            }
-          }
         }
       }
   },
@@ -49,8 +45,8 @@ PUT /_enrich/policy/enrich_label_sector
 {
   "match": {
     "indices": "diccionario_sectores",
-    "match_field": "company.label",
-    "enrich_fields": [ "company.label", "company.sector" ]
+    "match_field": "label",
+    "enrich_fields": [ "label", "sector" ]
   }
 }
 ```
@@ -70,13 +66,19 @@ PUT /_ingest/pipeline/enrich_label_company
       "enrich": {
         "policy_name": "enrich_label_sector",
         "field": "company.name.text",
-        "target_field": "under"
+        "target_field": "company"
         "max_matches": "1"
       }
     }
   ]
 }
-#"target_field": "company.label",
 ```
 
+### 5. Testing Ingest Pipeline
+```
+PUT /my-index-00001/_doc/my_id?pipeline=enrich_label_company
+{
+  "company.name.text": "name of a company"
+}
+```
 
