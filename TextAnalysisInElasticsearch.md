@@ -134,7 +134,7 @@ GET /diccionario_sectores/_termvectors
   },
   "fields": ["label"],
   "per_field_analyzer" : {
-    "fullname": "text"
+    "label": "text"
   }
 }
 ```
