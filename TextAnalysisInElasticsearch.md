@@ -81,6 +81,64 @@ Response
 }
 ```
 
+### Analyzer terms in document
+
+# Creating a index with custom analyzer
+
+```
+PUT /diccionario_sectores
+{
+    "aliases" : { },
+    "mappings" : {
+      "properties" : {
+        "label" : {
+          "type" : "text",
+          "analyzer" : "my_analyzer"
+        },
+        "sector" : {
+          "type" : "keyword"
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "analysis" : {
+          "filter" : {
+            "spanish_stop" : {
+              "type" : "stop",
+              "stopwords" : "_spanish_"
+            }
+          },
+          "analyzer" : {
+            "my_analyzer" : {
+              "filter" : [
+                "lowercase",
+                "spanish_stop"
+              ],
+              "tokenizer" : "standard"
+            }
+          }
+        }
+      }
+    }
+  }
+```
+
+# Testing with a virtual document
+```
+GET /diccionario_sectores/_termvectors
+{
+  "doc" : {
+    "label" : "llegada a lima el 06 enero, 2 maletas no han llegado, se indicó que vienen dentro de 2 días, me acerco nuevamente al aeropuerto, resulta que de las dos maletas llegó solo una\nLa otra (siendo priority) se fue a Madrid, no se ha podido indicar la hora de llegada de la segunda maleta",
+    "sector" : "no indentificado"
+  },
+  "fields": ["label"],
+  "per_field_analyzer" : {
+    "fullname": "text"
+  }
+}
+```
+
 ## Utils
 
 ### Creation of api-key for use in GoogleColab
