@@ -134,10 +134,11 @@ GET /diccionario_sectores/_termvectors
   },
   "fields": ["label"],
   "per_field_analyzer" : {
-    "label": "text"
+    "label": "my_analyzer"
   }
 }
 ```
+If you don't defined a "my_analyzer", can use "text"
 
 ## Utils
 
