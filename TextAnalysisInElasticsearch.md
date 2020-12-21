@@ -154,26 +154,19 @@ If you don't defined a "my_analyzer", can use "text"
         },
         "2" : {"term_freq" : 2,"tokens" : [{"position" : 6,"start_offset" : 28,"end_offset" : 29},{"position" : 17,"start_offset" : 85,"end_offset" : 86}]
         },
-        "acerco" : {
-          "term_freq" : 1,"tokens" : [{"position" : 20,"start_offset" : 96,"end_offset" : 102}]
+        "acerco" : {"term_freq" : 1,"tokens" : [{"position" : 20,"start_offset" : 96,"end_offset" : 102}]
         },
-        "aeropuerto" : {
-          "term_freq" : 1,"tokens" : [{"position" : 23,"start_offset" : 117,"end_offset" : 127}]
+        "aeropuerto" : {"term_freq" : 1,"tokens" : [{"position" : 23,"start_offset" : 117,"end_offset" : 127}]
         },
-        "dentro" : {
-          "term_freq" : 1,"tokens" : [{"position" : 15,"start_offset" : 75,"end_offset" : 81}]
+        "dentro" : {"term_freq" : 1,"tokens" : [{"position" : 15,"start_offset" : 75,"end_offset" : 81}]
         },
-        "dos" : {
-          "term_freq" : 1,"tokens" : [{"position" : 28,"start_offset" : 148,"end_offset" : 151}]
+        "dos" : {"term_freq" : 1,"tokens" : [{"position" : 28,"start_offset" : 148,"end_offset" : 151}]
         },
-        "días" : {
-          "term_freq" : 1,"tokens" : [{"position" : 18,"start_offset" : 87,"end_offset" : 91}]
+        "días" : {"term_freq" : 1,"tokens" : [{"position" : 18,"start_offset" : 87,"end_offset" : 91}]
         },
-        "enero" : {
-          "term_freq" : 1,"tokens" : [{"position" : 5,"start_offset" : 21,"end_offset" : 26}]
+        "enero" : {"term_freq" : 1,"tokens" : [{"position" : 5,"start_offset" : 21,"end_offset" : 26}]
         },
-        "hora" : {
-          "term_freq" : 1,"tokens" : [{"position" : 47,"start_offset" : 245,"end_offset" : 249}]
+        "hora" : {"term_freq" : 1,"tokens" : [{"position" : 47,"start_offset" : 245,"end_offset" : 249}]
         },
         "indicar" : {"term_freq" : 1,"tokens" : [{"position" : 45,"start_offset" : 234,"end_offset" : 241}]
         },
@@ -211,7 +204,7 @@ If you don't defined a "my_analyzer", can use "text"
     }
   }
 }
-
+```
 ## Utils
 
 ### Creation of api-key for use in GoogleColab
