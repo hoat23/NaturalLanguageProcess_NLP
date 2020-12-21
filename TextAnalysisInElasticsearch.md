@@ -139,6 +139,78 @@ GET /diccionario_sectores/_termvectors
 }
 ```
 If you don't defined a "my_analyzer", can use "text"
+```
+{
+  "_index" : "diccionario_sectores",
+  "_type" : "_doc",
+  "_version" : 0,
+  "found" : true,
+  "took" : 0,
+  "term_vectors" : {
+    "label" : {
+      "field_statistics" : {"sum_doc_freq" : 9981,"doc_count" : 2177,"sum_ttf" : 10120},
+      "terms" : {
+        "06" : {"term_freq" : 1,"tokens" : [{"position" : 4,"start_offset" : 18,"end_offset" : 20}]
+        },
+        "2" : {"term_freq" : 2,"tokens" : [{"position" : 6,"start_offset" : 28,"end_offset" : 29},{"position" : 17,"start_offset" : 85,"end_offset" : 86}]
+        },
+        "acerco" : {
+          "term_freq" : 1,"tokens" : [{"position" : 20,"start_offset" : 96,"end_offset" : 102}]
+        },
+        "aeropuerto" : {
+          "term_freq" : 1,"tokens" : [{"position" : 23,"start_offset" : 117,"end_offset" : 127}]
+        },
+        "dentro" : {
+          "term_freq" : 1,"tokens" : [{"position" : 15,"start_offset" : 75,"end_offset" : 81}]
+        },
+        "dos" : {
+          "term_freq" : 1,"tokens" : [{"position" : 28,"start_offset" : 148,"end_offset" : 151}]
+        },
+        "días" : {
+          "term_freq" : 1,"tokens" : [{"position" : 18,"start_offset" : 87,"end_offset" : 91}]
+        },
+        "enero" : {
+          "term_freq" : 1,"tokens" : [{"position" : 5,"start_offset" : 21,"end_offset" : 26}]
+        },
+        "hora" : {
+          "term_freq" : 1,"tokens" : [{"position" : 47,"start_offset" : 245,"end_offset" : 249}]
+        },
+        "indicar" : {"term_freq" : 1,"tokens" : [{"position" : 45,"start_offset" : 234,"end_offset" : 241}]
+        },
+        "indicó" : {"term_freq" : 1,"tokens" : [{"position" : 12,"start_offset" : 57,"end_offset" : 63}]
+        },
+        "lima" : {"term_freq" : 1,"tokens" : [{"position" : 2,"start_offset" : 10,"end_offset" : 14}]
+        },
+        "llegada" : {"term_freq" : 2,"tokens" : [{"position" : 0,"start_offset" : 0,"end_offset" : 7},{"position" : 49,"start_offset" : 253,"end_offset" : 260}]
+        },
+        "llegado" : {"term_freq" : 1,"tokens" : [{"position" : 10,"start_offset" : 45,"end_offset" : 52}]
+        },
+        "llegó" : {"term_freq" : 1,"tokens" : [{"position" : 30,"start_offset" : 160,"end_offset" : 165}]
+        },
+        "madrid" : {"term_freq" : 1,"tokens" : [{"position" : 40,"start_offset" : 210,"end_offset" : 216}]
+        },
+        "maleta" : {"term_freq" : 1,"tokens" : [{"position" : 53,"start_offset" : 275,"end_offset" : 281}]
+        },
+        "maletas" : {"term_freq" : 2,"tokens" : [{"position" : 7,"start_offset" : 30,"end_offset" : 37},{"position" : 29,"start_offset" : 152,"end_offset" : 159}]
+        },
+        "nuevamente" : {"term_freq" : 1,"tokens" : [{"position" : 21,"start_offset" : 103,"end_offset" : 113}]
+        },
+        "podido" : {"term_freq" : 1,"tokens" : [{"position" : 44,"start_offset" : 227,"end_offset" : 233}]
+        },
+        "priority" : {"term_freq" : 1,"tokens" : [{"position" : 36,"start_offset" : 191,"end_offset" : 199}]
+        },
+        "resulta" : {"term_freq" : 1,"tokens" : [{"position" : 24,"start_offset" : 129,"end_offset" : 136}]
+        },
+        "segunda" : {"term_freq" : 1,"tokens" : [{"position" : 52,"start_offset" : 267,"end_offset" : 274}]
+        },
+        "solo" : {"term_freq" : 1,"tokens" : [{"position" : 31,"start_offset" : 166,"end_offset" : 170}]
+        },
+        "vienen" : {"term_freq" : 1,"tokens" : [{"position" : 14,"start_offset" : 68,"end_offset" : 74}]
+        }
+      }
+    }
+  }
+}
 
 ## Utils
 
