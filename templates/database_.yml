@@ -1,0 +1,71 @@
+PUT _index_template/diccionario
+{
+  "index_patterns": ["diccionario_*"],
+  "template": {
+    "settings": {
+      "analysis" : {
+          "filter" : {
+            "custom_words_stop" : {
+              "ignore_case" : "true",
+              "type" : "stop",
+              "stopwords" : [
+                "sac",
+                "s.a.c.",
+                "s.a.c",
+                "sa",
+                "s.a.",
+                "s.a",
+                "\n",
+                "\t"
+              ]
+            },
+            "spanish_stop" : {
+              "type" : "stop",
+              "stopwords" : "_spanish_"
+            }
+          },
+          "analyzer" : {
+            "my_analyzer" : {
+              "filter" : [
+                "lowercase",
+                "custom_words_stop",
+                "spanish_stop"
+              ],
+              "tokenizer" : "standard"
+            }
+          }
+        },
+      "number_of_replicas": "1"
+    },
+    "mappings" : {
+      "properties" : {
+        "label" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword"
+            }
+          },
+          "analyzer" : "my_analyzer"
+        },
+        "sector" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword"
+            }
+          },
+          "analyzer" : "my_analyzer"
+        }
+      }
+    },
+    "aliases": {
+      "mydata": { }
+    }
+  },
+  "priority": 0,
+  "version": 1,
+  "_meta": {
+    "description": "diccionary by label and sector fields"
+  }
+}
