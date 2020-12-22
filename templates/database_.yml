@@ -1,6 +1,6 @@
-PUT _index_template/diccionario
+PUT _index_template/database
 {
-  "index_patterns": ["diccionario_*"],
+  "index_patterns": ["database_*"],
   "template": {
     "settings": {
       "analysis" : {
@@ -39,33 +39,203 @@ PUT _index_template/diccionario
     },
     "mappings" : {
       "properties" : {
+        "company" : {
+          "properties" : {
+            "activity" : {
+              "type" : "keyword"
+            },
+            "id" : {
+              "type" : "keyword"
+            },
+            "name" : {
+              "properties" : {
+                "text" : {
+                  "type" : "text",
+                  "analyzer": "my_analyzer",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword"
+                    }
+                  }
+                }
+              }
+            },
+            "sede" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "excel" : {
+          "properties" : {
+            "elk" : {
+              "type" : "text",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword",
+                  "ignore_above" : 256
+                }
+              }
+            },
+            "id" : {
+              "type" : "keyword"
+            }
+          }
+        },
         "label" : {
           "type" : "text",
+          "analyzer": "my_analyzer",
           "fields" : {
             "keyword" : {
               "type" : "keyword"
             }
-          },
-          "analyzer" : "my_analyzer"
+          }
+        },
+        "producto" : {
+          "properties" : {
+            "price" : {
+              "properties" : {
+                "text" : {
+                  "type" : "keyword"
+                },
+                "value" : {
+                  "type" : "double"
+                }
+              }
+            },
+            "type" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "reclamante" : {
+          "properties" : {
+            "address" : {
+              "type" : "keyword"
+            },
+            "apoderado" : {
+              "type" : "keyword"
+            },
+            "doc_type" : {
+              "type" : "keyword"
+            },
+            "email" : {
+              "type" : "keyword"
+            },
+            "id" : {
+              "type" : "keyword"
+            },
+            "is_child" : {
+              "type" : "keyword"
+            },
+            "lastname" : {
+              "properties" : {
+                "1" : {
+                  "type" : "keyword"
+                },
+                "2" : {
+                  "type" : "keyword"
+                }
+              }
+            },
+            "nombre" : {
+              "type" : "keyword"
+            },
+            "phone" : {
+              "type" : "keyword"
+            },
+            "tipo_persona" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "registro" : {
+          "properties" : {
+            "method" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "reporte" : {
+          "properties" : {
+            "database" : {
+              "type" : "keyword"
+            },
+            "description" : {
+              "type" : "text",
+              "analyzer" : "my_analyzer",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword"
+                }
+              }
+            },
+            "detail" : {
+              "type" : "text",
+              "analyzer" : "my_analyzer",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword"
+                }
+              }
+            },
+            "fecha" : {
+              "properties" : {
+                "text" : {
+                  "type" : "keyword"
+                }
+              }
+            },
+            "files" : {
+              "type" : "keyword"
+            },
+            "id" : {
+              "type" : "keyword"
+            },
+            "request" : {
+              "type" : "keyword"
+            },
+            "type" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "respuesta" : {
+          "properties" : {
+            "fecha" : {
+              "properties" : {
+                "text" : {
+                  "type" : "keyword"
+                }
+              }
+            },
+            "status" : {
+              "type" : "keyword"
+            },
+            "text" : {
+              "type" : "text",
+              "analyzer" : "my_analyzer",
+              "fields" : {
+                "keyword" : {
+                  "type" : "keyword"
+                }
+              }
+            }
+          }
         },
         "sector" : {
           "type" : "text",
+          "analyzer": "my_analyzer",
           "fields" : {
             "keyword" : {
               "type" : "keyword"
             }
-          },
-          "analyzer" : "my_analyzer"
+          }
         }
       }
     },
     "aliases": {
-      "mydata": { }
     }
   },
   "priority": 0,
-  "version": 1,
-  "_meta": {
-    "description": "diccionary by label and sector fields"
-  }
+  "version": 1
 }
