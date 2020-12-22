@@ -93,10 +93,21 @@ PUT /diccionario_sectores
       "properties" : {
         "label" : {
           "type" : "text",
-          "analyzer" : "my_analyzer"
+          "analyzer" : "my_analyzer",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
         },
         "sector" : {
-          "type" : "keyword"
+          "type" : "text",
+          "analyzer": "my_analyzer", 
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
         }
       }
     },
@@ -107,12 +118,22 @@ PUT /diccionario_sectores
             "spanish_stop" : {
               "type" : "stop",
               "stopwords" : "_spanish_"
+            },
+            "custom_words_stop": {
+              "type": "stop",
+              "ignore_case": true,
+              "stopwords": [ 
+                "sac", "s.a.c.","s.a.c",
+                "sa","s.a.","s.a",
+                "\n","\t"
+              ]
             }
           },
           "analyzer" : {
             "my_analyzer" : {
               "filter" : [
                 "lowercase",
+                "custom_words_stop",
                 "spanish_stop"
               ],
               "tokenizer" : "standard"
