@@ -30,3 +30,7 @@ Go to https://developer.twitter.com/en/apps
 # Data Modeling  & Feacture Extraction
 
 - https://chatbotslife.com/know-your-intent-sota-results-in-intent-classification-8e1ca47f364c
+
+# Datasets Spanish Corpus
+
+- https://lionbridge.ai/datasets/22-best-spanish-language-datasets-for-machine-learning/
