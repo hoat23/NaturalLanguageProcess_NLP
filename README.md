@@ -26,3 +26,7 @@ Go to https://developer.twitter.com/en/apps
 - SYM: Symbol
 - VERB: Verb
 - X: Other
+
+# Data Modeling  & Feacture Extraction
+
+- https://chatbotslife.com/know-your-intent-sota-results-in-intent-classification-8e1ca47f364c
