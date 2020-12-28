@@ -2,9 +2,10 @@
 
 ## Mapping
 
-### Defining fieldd
+### Defining fields
 
-#### Whithout fielddata
+#### Fielddata
+Without field data
 ```
 PUT my-index-000001
 {
@@ -22,8 +23,7 @@ PUT my-index-000001
   }
 }
 ```
-
-#### With fieldata
+With fielddata
 ```
 PUT my-index-000001/_mapping
 {
@@ -35,6 +35,9 @@ PUT my-index-000001/_mapping
   }
 }
 ```
+
+# Review
+- https://www.elastic.co/guide/en/elasticsearch/reference/master/runtime-examples.html
 
 ## Standard Analysis 
 ```
