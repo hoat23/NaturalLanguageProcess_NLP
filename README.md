@@ -30,6 +30,7 @@ Go to https://developer.twitter.com/en/apps
 # Data Modeling  & Feacture Extraction
 
 - https://chatbotslife.com/know-your-intent-sota-results-in-intent-classification-8e1ca47f364c
+- https://medium.com/@mishra.thedeepak/doc2vec-simple-implementation-example-df2afbbfbad5
 
 # Datasets Spanish Corpus
 
