@@ -1,5 +1,41 @@
 # Text Analysis in Elasticsearch
 
+## Mapping
+
+### Defining fieldd
+
+#### Whithout fielddata
+```
+PUT my-index-000001
+{
+  "mappings": {
+    "properties": {
+      "my_field": { 
+        "type": "text",
+        "fields": {
+          "keyword": { 
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+#### With fieldata
+```
+PUT my-index-000001/_mapping
+{
+  "properties": {
+    "my_field": { 
+      "type":     "text",
+      "fielddata": true
+    }
+  }
+}
+```
+
 ## Standard Analysis 
 ```
 POST _analyze
