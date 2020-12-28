@@ -289,3 +289,5 @@ POST /_security/api_key
 - https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
 - https://www.elastic.co/es/blog/text-similarity-search-with-vectors-in-elasticsearch
 
+### Review
+- https://stackoverflow.com/questions/32998228/elasticsearch-extract-number-from-a-field
