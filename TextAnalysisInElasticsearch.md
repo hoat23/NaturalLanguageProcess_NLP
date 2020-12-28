@@ -291,3 +291,4 @@ POST /_security/api_key
 
 ### Review
 - https://stackoverflow.com/questions/32998228/elasticsearch-extract-number-from-a-field
+- https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-word-delimiter-graph-tokenfilter.html
