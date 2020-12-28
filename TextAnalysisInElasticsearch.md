@@ -247,3 +247,9 @@ POST /_security/api_key
   }
 }
 ```
+
+## Documentation
+- https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html
+- https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
+- https://www.elastic.co/es/blog/text-similarity-search-with-vectors-in-elasticsearch
+
