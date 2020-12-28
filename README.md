@@ -35,3 +35,4 @@ Go to https://developer.twitter.com/en/apps
 
 - https://lionbridge.ai/datasets/22-best-spanish-language-datasets-for-machine-learning/
 - https://grakn.ai/
+- https://neo4j.com/books/
