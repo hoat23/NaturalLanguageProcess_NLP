@@ -41,3 +41,4 @@ Go to https://developer.twitter.com/en/apps
 # Ontologic Model
 
 - http://ceur-ws.org/Vol-1219/paper5.pdf
+- file:///C:/Users/LENOVO/Downloads/A%20data%20engineer's%20guide%20to%20semantic%20modelling%20(1).pdf
