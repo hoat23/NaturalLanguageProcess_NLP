@@ -49,3 +49,5 @@ Go to https://developer.twitter.com/en/apps
 - https://github.com/promolic1/rae/blob/master/rae.py
 - https://github.com/lamberete/lemarioExtactor
 - https://github.com/Alaralan/raedic
+- https://github.com/cosminpm/dictio_bot
+- https://github.com/perysoy/python_rae
