@@ -51,3 +51,6 @@ Go to https://developer.twitter.com/en/apps
 - https://github.com/Alaralan/raedic
 - https://github.com/cosminpm/dictio_bot
 - https://github.com/perysoy/python_rae
+
+# NLP-SearchEngine
+- https://github.com/semi-technologies/weaviate
