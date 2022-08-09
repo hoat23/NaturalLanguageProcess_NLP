@@ -55,3 +55,4 @@ Go to https://developer.twitter.com/en/apps
 # NLP-SearchEngine
 - https://github.com/semi-technologies/weaviate
 - https://github.com/semi-technologies/weaviate-examples
+- https://weaviate.io/developers/weaviate/current/getting-started/installation.html#docker-compose
