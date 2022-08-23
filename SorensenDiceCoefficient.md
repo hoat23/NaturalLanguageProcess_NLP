@@ -8,3 +8,6 @@ Other names include:
     Czekanowski's binary (non-quantitative) index[4]
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
+### Documentation
+- https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
+- https://github.com/life4/textdistance/blob/master/textdistance/algorithms/token_based.py
