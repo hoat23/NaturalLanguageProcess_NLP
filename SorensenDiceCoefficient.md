@@ -9,14 +9,6 @@ Other names include:
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
 
-### Diagram 
-
-<div align="center">
-<img src="https://github.com/hoat23/NaturalLanguageProcess_NLP/blob/master/img/img_01.png" width="800" align="center"/>
-</div>
-
-
-
 ### Algorithm
 ```python
 def n_grams(word,n=2):
@@ -56,6 +48,12 @@ Result
 ```bash
 similitud de [cazza] con [casa] : 0.5454545454545454
 ```
+
+### Diagram Implementation
+
+<div align="center">
+<img src="https://github.com/hoat23/NaturalLanguageProcess_NLP/blob/master/img/img_01.png" width="900" align="center"/>
+</div>
 
 ### Documentation
 - https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
