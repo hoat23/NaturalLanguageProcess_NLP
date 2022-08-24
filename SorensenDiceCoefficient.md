@@ -9,7 +9,8 @@ Other names include:
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
 
-```
+### Algorithm
+```python
 def n_grams(word,n=2):
   word = list("_"+word+"_")
   bigrams = []
@@ -24,15 +25,27 @@ def SorensenDiceCoefficient(word1,word2):
   interseccion = [x for x in bigram1 if x in bigram2]
   coeficient = 2 * len(interseccion) / ( len(bigram1) + len(bigram2) )
   return coeficient
+```
+### Compare 2 words
 
+```python 
 text1 = "cazza"
 coef1 = SorensenDiceCoefficient(text1, "caza")
 print("similitud de [cazza] con [caza] : {}".format(coef1))
+```
+Result
+```bash
+similitud de [cazza] con [caza] : 0.9090909090909091
+```
 
+```python 
 coef2 = SorensenDiceCoefficient(text1, "casa")
 print("similitud de [cazza] con [casa] : {}".format(coef2))
 ```
-
+Result
+```bash
+similitud de [cazza] con [casa] : 0.5454545454545454
+```
 
 ### Documentation
 - https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
