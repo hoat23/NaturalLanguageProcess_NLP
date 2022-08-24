@@ -8,7 +8,35 @@ Other names include:
     Czekanowski's binary (non-quantitative) index[4]
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
+
+´´´
+def n_grams(word,n=2):
+  word = list("_"+word+"_")
+  bigrams = []
+  for i in range(0,len(word)-n+1):
+    token = ''.join(word[i:i+n])
+    bigrams.append(token)
+  return bigrams
+
+def SorensenDiceCoefficient(word1,word2):
+  bigram1 = n_grams(word1)
+  bigram2 = n_grams(word2)
+  interseccion = [x for x in bigram1 if x in bigram2]
+  coeficient = 2 * len(interseccion) / ( len(bigram1) + len(bigram2) )
+  return coeficient
+
+text1 = "cazza"
+coef1 = SorensenDiceCoefficient(text1, "caza")
+print("similitud de [cazza] con [caza] : {}".format(coef1))
+
+coef2 = SorensenDiceCoefficient(text1, "casa")
+print("similitud de [cazza] con [casa] : {}".format(coef2))
+´´´
+
+
 ### Documentation
 - https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
 - https://github.com/life4/textdistance/blob/master/textdistance/algorithms/token_based.py
 - https://libraries.io/conda/strsimpy#sorensen-dice-coefficient
+
+
