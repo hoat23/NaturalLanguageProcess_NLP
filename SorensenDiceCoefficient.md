@@ -9,7 +9,7 @@ Other names include:
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
 
-´´´
+```
 def n_grams(word,n=2):
   word = list("_"+word+"_")
   bigrams = []
@@ -31,7 +31,7 @@ print("similitud de [cazza] con [caza] : {}".format(coef1))
 
 coef2 = SorensenDiceCoefficient(text1, "casa")
 print("similitud de [cazza] con [casa] : {}".format(coef2))
-´´´
+```
 
 
 ### Documentation
