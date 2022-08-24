@@ -12,7 +12,7 @@ Other names include:
 ### Diagram 
 
 <div align="center">
-<img src="https://github.com/hoat23/NaturalLanguageProcess_NLP/blob/master/img/img_01.png" width="600" align="center"/>
+<img src="https://github.com/hoat23/NaturalLanguageProcess_NLP/blob/master/img/img_01.png" width="800" align="center"/>
 </div>
 
 
