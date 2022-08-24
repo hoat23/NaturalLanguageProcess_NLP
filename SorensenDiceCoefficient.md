@@ -28,6 +28,7 @@ def SorensenDiceCoefficient(word1,word2):
 ```
 ### Compare 2 words
 
+#### Compare "cazza" with "caza"
 ```python 
 text1 = "cazza"
 coef1 = SorensenDiceCoefficient(text1, "caza")
@@ -38,6 +39,7 @@ Result
 similitud de [cazza] con [caza] : 0.9090909090909091
 ```
 
+#### Compare "cazza" with "casa"
 ```python 
 coef2 = SorensenDiceCoefficient(text1, "casa")
 print("similitud de [cazza] con [casa] : {}".format(coef2))
