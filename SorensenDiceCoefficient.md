@@ -9,6 +9,14 @@ Other names include:
     Measure of genetic similarity[5]
     Zijdenbos similarity index,[6][7] referring to a 1994 paper of Zijdenbos et al.[8][3]
 
+### Diagram 
+
+<div align="center">
+<img src="https://github.com/hoat23/NaturalLanguageProcess_NLP/blob/master/img/img_01.png" width="600" align="center"/>
+</div>
+
+
+
 ### Algorithm
 ```python
 def n_grams(word,n=2):
