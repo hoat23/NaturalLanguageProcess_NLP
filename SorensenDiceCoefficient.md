@@ -11,3 +11,4 @@ Other names include:
 ### Documentation
 - https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
 - https://github.com/life4/textdistance/blob/master/textdistance/algorithms/token_based.py
+- https://libraries.io/conda/strsimpy#sorensen-dice-coefficient
