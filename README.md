@@ -31,6 +31,7 @@ Go to https://developer.twitter.com/en/apps
 
 - https://chatbotslife.com/know-your-intent-sota-results-in-intent-classification-8e1ca47f364c
 - https://medium.com/@mishra.thedeepak/doc2vec-simple-implementation-example-df2afbbfbad5
+- https://guilles.website/2017/10/18/introduccion-a-fasttext-entrenando-el-modelo-con-lenguaje-coloquial-chapin/
 
 # Datasets Spanish Corpus
 
