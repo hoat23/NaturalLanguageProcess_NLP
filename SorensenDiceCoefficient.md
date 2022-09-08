@@ -59,5 +59,5 @@ similitud de [cazza] con [casa] : 0.5454545454545454
 - https://help.highbond.com/helpdocs/analytics/141/scripting-guide/en-us/Content/lang_ref/functions/r_dicecoefficient.htm
 - https://github.com/life4/textdistance/blob/master/textdistance/algorithms/token_based.py
 - https://libraries.io/conda/strsimpy#sorensen-dice-coefficient
-
+- https://www.npmjs.com/package/dice-coefficient (nodejs)
 
